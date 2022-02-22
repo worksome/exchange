@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Worksome\Exchange\Actions;
 
-use Illuminate\Contracts\Validation\Factory;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\ValidationException;
 use Worksome\Exchange\Contracts\Actions\ValidatesCurrencyCodes;
 use Worksome\Exchange\Contracts\CurrencyCodeProvider;
 use Worksome\Exchange\Exceptions\InvalidCurrencyCodeException;

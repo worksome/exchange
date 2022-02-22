@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use Worksome\Exchange\Exceptions\InvalidCurrencyCodeException;
 use Worksome\Exchange\Exchange;
 use Worksome\Exchange\Support\Rates;
+
 use function Termwind\render;
 
 final class ViewLatestRatesCommand extends Command
@@ -45,6 +46,5 @@ final class ViewLatestRatesCommand extends Command
 
     private function renderRates(Rates $rates): void
     {
-
     }
 }

@@ -19,12 +19,12 @@ final class ExchangeServiceProvider extends PackageServiceProvider
 {
     public function registeringPackage(): void
     {
+        $this->app->singleton('exchange', Exchange::class);
+
         $this->app->bind(ExchangeRateProvider::class, function (Application $app) {
             return (new ExchangeRateManager($app))->driver();
         });
-
         $this->app->bind(CurrencyCodeProvider::class, FlatCurrencyCodeProvider::class);
-
         $this->app->bind(ValidatesCurrencyCodes::class, ValidateCurrencyCodes::class);
     }
 

@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Worksome\Exchange\Testing;
 
+use PHPUnit\Framework\Assert;
 use Worksome\Exchange\Contracts\ExchangeRateProvider;
 use Worksome\Exchange\Support\Rates;
 
 final class FakeExchangeRateProvider implements ExchangeRateProvider
 {
+    private int $ratesRetrieved = 0;
+
     /**
      * @var array<string, float>
      */
@@ -16,6 +19,8 @@ final class FakeExchangeRateProvider implements ExchangeRateProvider
 
     public function getRates(string $baseCurrency, array $currencies): Rates
     {
+        $this->ratesRetrieved++;
+
         return new Rates($baseCurrency, $this->getRatesArray($currencies), now());
     }
 
@@ -25,6 +30,17 @@ final class FakeExchangeRateProvider implements ExchangeRateProvider
     public function defineRates(array $rates): self
     {
         $this->predefinedRates = array_merge($this->predefinedRates, $rates);
+
+        return $this;
+    }
+
+    public function assertRetrievedRates(int $times = 1): self
+    {
+        Assert::assertSame(
+            $this->ratesRetrieved,
+            $times,
+            "Expected to have retrieved rates {$times} times but they were retrieved {$this->ratesRetrieved} times."
+        );
 
         return $this;
     }
