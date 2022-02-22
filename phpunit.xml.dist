@@ -18,6 +18,11 @@
     beStrictAboutOutputDuringTests="true"
     verbose="true"
 >
+    <groups>
+        <exclude>
+            <group>integration</group>
+        </exclude>
+    </groups>
     <testsuites>
         <testsuite name="Worksome Test Suite">
             <directory>tests</directory>
