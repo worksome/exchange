@@ -1,5 +1,14 @@
 <?php
 
-use VendorName\Skeleton\Tests\TestCase;
+use Worksome\Exchange\Support\FlatCurrencyCodeProvider;
+use Worksome\Exchange\Tests\TestCase;
 
-uses(TestCase::class)->in(__DIR__);
+uses(TestCase::class)->in('Feature');
+
+/**
+ * @return non-empty-array<int, string>
+ */
+function currencies(): array
+{
+    return (new FlatCurrencyCodeProvider())->all();
+}
