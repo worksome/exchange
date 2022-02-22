@@ -11,8 +11,7 @@ final class Exchange
 {
     public function __construct(
         private ExchangeRateProvider $exchangeRateProvider,
-    )
-    {
+    ) {
     }
 
     /**
@@ -22,5 +21,4 @@ final class Exchange
     {
         return $this->exchangeRateProvider->getRates($baseCurrency, $currencies);
     }
-
 }

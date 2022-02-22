@@ -15,8 +15,7 @@ final class Rates
         private string $baseCurrency,
         private array $rates,
         private CarbonInterface $retrievedAt,
-    )
-    {
+    ) {
     }
 
     public function getBaseCurrency(): string
@@ -36,5 +35,4 @@ final class Rates
     {
         return $this->retrievedAt;
     }
-
 }
