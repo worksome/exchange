@@ -11,7 +11,7 @@ return [
      * Supported: 'null', 'fixer', 'exchange_rate', 'cache'
      */
 
-    'default' => env('EXCHANGE_DRIVER', 'null'),
+    'default' => env('EXCHANGE_DRIVER', 'exchange_rate'),
 
     'services' => [
 
@@ -43,7 +43,7 @@ return [
         */
 
         'cache' => [
-            'strategy' => 'fixer',
+            'strategy' => 'exchange_rate',
             'ttl' => 60 * 60 * 24, // 24 hours
             'key' => 'cached_exchange_rates',
         ],

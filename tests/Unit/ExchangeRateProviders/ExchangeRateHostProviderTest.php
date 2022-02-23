@@ -9,7 +9,7 @@ use Worksome\Exchange\Support\Rates;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Client\Factory;
 
-it('actually works', function () {
+it('is able to make a real call to the API', function () {
     $client = new Factory();
     $fixerProvider = new ExchangeRateHostProvider($client);
     $rates = $fixerProvider->getRates('EUR', currencies());
