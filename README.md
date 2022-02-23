@@ -76,6 +76,8 @@ php artisan exchange:rates USD GBP EUR
 
 In the example above, exchange rates will be retrieved and displayed in the console from a base of USD to GBP and EUR respectively. You can add as many currencies as you'd like to the command.
 
+<img width="1040" alt="CleanShot 2022-02-23 at 13 10 55@2x" src="https://user-images.githubusercontent.com/12202279/155325937-70c296d1-33be-484d-bcd1-bee3085dc592.png">
+
 ## Testing
 
 To help you write tests using Exchange, we provide a fake implementation via the `Exchange::fake()` method.
