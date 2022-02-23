@@ -60,7 +60,7 @@ Fixer for up-to-date exchange rates.
 [exchangerate.host](https://exchangerate.host/) is a free alternative to Fixer with an identical API spec. You 
 don't even need an API key! 
 
-In your `exchange.php` config file, set `default` to `fixer`, or set `EXCHANGE_DRIVER` to `fixer` in your `.env` file.
+In your `exchange.php` config file, set `default` to `exchange_rate`, or set `EXCHANGE_DRIVER` to `exchange_rate` in your `.env` file.
 
 With that task completed, you're ready to start using [exchangerate.host](https://exchangerate.host/) for retrieving up-to-date
 exchange rates.
