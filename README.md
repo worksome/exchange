@@ -66,6 +66,16 @@ The strategy is the service that will be used to perform the exchange rate looku
 
 There is also the option to override the `ttl` (how many seconds rates are cached for) and `key` for your cached rates.
 
+## Artisan
+
+We provide an Artisan command for you to check Exchange is working correctly in your project.
+
+```bash
+php artisan exchange:rates USD GBP EUR
+```
+
+In the example above, exchange rates will be retrieved and displayed in the console from a base of USD to GBP and EUR respectively. You can add as many currencies as you'd like to the command.
+
 ## Testing
 
 To help you write tests using Exchange, we provide a fake implementation via the `Exchange::fake()` method.
