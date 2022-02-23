@@ -8,6 +8,7 @@ return [
      *
      * Supported: 'null', 'fixer', 'cache'
      */
+
     'default' => env('EXCHANGE_DRIVER', 'null'),
 
     'services' => [
