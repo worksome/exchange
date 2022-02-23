@@ -1,4 +1,9 @@
-# Exchange - Check exchange rates for any currency in Laravel
+# Exchange
+
+Check exchange rates for any currency in Laravel
+
+[![Tests](https://github.com/worksome/exchange/actions/workflows/run-tests.yml/badge.svg)](https://github.com/worksome/exchange/actions/workflows/run-tests.yml)
+[![PHPStan](https://github.com/worksome/exchange/actions/workflows/phpstan.yml/badge.svg)](https://github.com/worksome/exchange/actions/workflows/phpstan.yml)
 
 If your app supports multi-currency, you'll no doubt need to check exchange rates. There are many third party services
 to accomplish this, but why bother reinventing the wheel when we've done all the hard work for you?
