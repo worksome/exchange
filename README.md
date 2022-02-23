@@ -63,7 +63,22 @@ There is also the option to override the `ttl` (how many seconds rates are cache
 
 ## Testing
 
-Exchange prides itself on a thorough test suite written in Pest, strict static analysis, and a very high level of code coverage. You may run these tests yourself by cloning the project and running our test script:
+To help you write tests using Exchange, we provide a fake implementation via the `Exchange::fake()` method.
+
+```php
+it('retrieves exchange rates', function () {
+    Exchange::fake(['GBP' => 1.25, 'USD' => 1.105]);
+    
+    $this->get(route('my-app-route'))
+        ->assertOk();
+        
+    Exchange::assertRetrievedRates();
+});
+```
+
+The `assertRetrievedRates` method will cause your test to fail if no exchange rates were ever retrieved.
+
+Internally, Exchange prides itself on a thorough test suite written in Pest, strict static analysis, and a very high level of code coverage. You may run these tests yourself by cloning the project and running our test script:
 
 ```bash
 composer test
