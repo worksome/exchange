@@ -14,12 +14,9 @@ use Worksome\Exchange\Support\Rates;
 
 final class FixerProvider implements ExchangeRateProvider
 {
-    /**
-     * @param array{access_key: string} $options
-     */
     public function __construct(
         private Factory $client,
-        private array $options,
+        private string $accessKey,
     ) {
     }
 
@@ -47,7 +44,7 @@ final class FixerProvider implements ExchangeRateProvider
     {
         return $this->client()
             ->get('/latest', [
-                'access_key' => $this->options['access_key'],
+                'access_key' => $this->accessKey,
                 'base' => $baseCurrency,
                 'format' => 1,
                 'symbols' => implode(',', $currencies),
