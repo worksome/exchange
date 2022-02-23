@@ -32,10 +32,9 @@ final class Exchange
      */
     public function rates(string $baseCurrency, array $currencies): Rates
     {
-        return $this->exchangeRateProvider->getRates(
-            $baseCurrency,
-            ($this->validateCurrencyCodes)([$baseCurrency, ...$currencies])
-        );
+        ($this->validateCurrencyCodes)([$baseCurrency, ...$currencies]);
+
+        return $this->exchangeRateProvider->getRates($baseCurrency, $currencies);
     }
 
     public function __call(string $name, array $arguments): mixed

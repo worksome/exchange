@@ -7,6 +7,7 @@ namespace Worksome\Exchange\Support;
 use Illuminate\Cache\Repository;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Support\Manager;
+use Worksome\Exchange\Exceptions\InvalidConfigurationException;
 use Worksome\Exchange\ExchangeRateProviders\CachedProvider;
 use Worksome\Exchange\ExchangeRateProviders\FixerProvider;
 use Worksome\Exchange\ExchangeRateProviders\NullProvider;
@@ -25,10 +26,16 @@ final class ExchangeRateManager extends Manager
 
     public function createFixerDriver(): FixerProvider
     {
+        $apiKey = $this->config->get('exchange.services.fixer.access_key');
+
+        throw_unless(is_string($apiKey), new InvalidConfigurationException(
+            'You haven\'t set up an API key for Fixer!'
+        ));
+
         return new FixerProvider(
             // @phpstan-ignore-next-line
             $this->container->make(Factory::class),
-            strval($this->config->get('exchange.services.fixer.access_key')),
+            $apiKey,
         );
     }
 

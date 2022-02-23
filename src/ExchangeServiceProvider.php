@@ -8,6 +8,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Worksome\Exchange\Actions\ValidateCurrencyCodes;
+use Worksome\Exchange\Commands\InstallCommand;
 use Worksome\Exchange\Commands\ViewLatestRatesCommand;
 use Worksome\Exchange\Contracts\Actions\ValidatesCurrencyCodes;
 use Worksome\Exchange\Contracts\CurrencyCodeProvider;
@@ -35,6 +36,9 @@ final class ExchangeServiceProvider extends PackageServiceProvider
         $package
             ->name('exchange')
             ->hasConfigFile()
-            ->hasCommand(ViewLatestRatesCommand::class);
+            ->hasCommands(
+                InstallCommand::class,
+                ViewLatestRatesCommand::class
+            );
     }
 }
