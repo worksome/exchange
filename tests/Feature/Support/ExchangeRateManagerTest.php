@@ -3,6 +3,7 @@
 use Worksome\Exchange\Contracts\ExchangeRateProvider;
 use Worksome\Exchange\Exceptions\InvalidConfigurationException;
 use Worksome\Exchange\ExchangeRateProviders\CachedProvider;
+use Worksome\Exchange\ExchangeRateProviders\ExchangeRateHostProvider;
 use Worksome\Exchange\ExchangeRateProviders\FixerProvider;
 use Worksome\Exchange\ExchangeRateProviders\NullProvider;
 use Worksome\Exchange\Support\ExchangeRateManager;
@@ -20,6 +21,7 @@ it('can instantiate all drivers', function (string $driver, string $expectedClas
 })->with([
     ['null', NullProvider::class],
     ['fixer', FixerProvider::class],
+    ['exchange_rate', ExchangeRateHostProvider::class],
     ['cache', CachedProvider::class],
 ]);
 

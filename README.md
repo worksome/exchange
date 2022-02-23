@@ -29,7 +29,15 @@ Exchange is now installed!
 
 ## Usage
 
-You can start using Exchange right away with the `null` driver, which comes preconfigured. This will simply return `1.0` for every exchange rate, which is generally fine for local development.
+Exchange ships with a number of useful drivers for retrieving exchange rates. The default is `exchange_rates`,
+which is a free service, but you're welcome to change that to suit you app's requirements.
+
+The driver can be set using the `EXCHANGE_DRIVER` environment variable. Supported values are: `null`, `fixer`, `exchange_rate` and `cache`.
+Let's take a look at each of the options available.
+
+### Null
+
+You can start using Exchange locally with the `null` driver. This will simply return `1.0` for every exchange rate, which is generally fine for local development.
 
 ```php
 use Worksome\Exchange\Facades\Exchange;
@@ -54,6 +62,16 @@ access key from Fixer.
 
 That's it! Fixer is now configured as the default driver and running `Exchange::rates()` again will make a request to
 Fixer for up-to-date exchange rates.
+
+### ExchangeRate.host
+
+[exchangerate.host](https://exchangerate.host/) is a free alternative to Fixer with an identical API spec. You 
+don't even need an API key! 
+
+In your `exchange.php` config file, set `default` to `exchange_rate`, or set `EXCHANGE_DRIVER` to `exchange_rate` in your `.env` file.
+
+With that task completed, you're ready to start using [exchangerate.host](https://exchangerate.host/) for retrieving up-to-date
+exchange rates.
 
 ### Cache
 

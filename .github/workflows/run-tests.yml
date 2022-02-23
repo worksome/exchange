@@ -11,6 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       PREVENT_OUTPUT: true
+      FIXER_ACCESS_KEY: ${{ secrets.FIXER_ACCESS_KEY }}
     strategy:
       fail-fast: true
       matrix:
@@ -52,3 +53,6 @@ jobs:
 
       - name: Execute tests
         run: composer test:unit
+
+      - name: Execute integration tests
+        run: vendor/bin/pest --group=integration
