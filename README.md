@@ -29,7 +29,7 @@ Exchange is now installed!
 
 ## Usage
 
-Exchange ships with a number of useful drivers for retrieving exchange rates. The default is `exchange_rates`,
+Exchange ships with a number of useful drivers for retrieving exchange rates. The default is `exchange_rate`,
 which is a free service, but you're welcome to change that to suit you app's requirements.
 
 The driver can be set using the `EXCHANGE_DRIVER` environment variable. Supported values are: `null`, `fixer`, `exchange_rate` and `cache`.
