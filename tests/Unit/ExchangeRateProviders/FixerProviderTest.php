@@ -11,7 +11,7 @@ use Illuminate\Http\Client\Factory;
 
 it('actually works', function () {
     $client = new Factory();
-    $fixerProvider = new FixerProvider($client, ['accessKey' => getenv('FIXER_ACCESS_KEY')]);
+    $fixerProvider = new FixerProvider($client, ['access_key' => getenv('FIXER_ACCESS_KEY')]);
     $rates = $fixerProvider->getRates('EUR', currencies());
 
     expect($rates)->toBeInstanceOf(Rates::class);
@@ -29,7 +29,7 @@ it('makes a HTTP request to the correct endpoint', function () {
         ],
     ]]);
 
-    $fixerProvider = new FixerProvider($client, ['accessKey' => 'password']);
+    $fixerProvider = new FixerProvider($client, ['access_key' => 'password']);
     $fixerProvider->getRates('EUR', currencies());
 
     $client->assertSent(function (Request $request) {
@@ -47,7 +47,7 @@ it('returns floats for all rates', function () {
         ],
     ]]);
 
-    $fixerProvider = new FixerProvider($client, ['accessKey' => 'password']);
+    $fixerProvider = new FixerProvider($client, ['access_key' => 'password']);
     $rates = $fixerProvider->getRates('EUR', currencies());
 
     expect($rates->getRates())->each->toBeFloat();
@@ -62,7 +62,7 @@ it('sets the returned timestamp as the retrievedAt timestamp', function () {
         'rates' => [],
     ]]);
 
-    $fixerProvider = new FixerProvider($client, ['accessKey' => 'password']);
+    $fixerProvider = new FixerProvider($client, ['access_key' => 'password']);
     $rates = $fixerProvider->getRates('EUR', currencies());
 
     expect($rates->getRetrievedAt()->timestamp)->toBe(now()->subDay()->timestamp);
@@ -72,6 +72,6 @@ it('throws a RequestException if a 500 error occurs', function () {
     $client = new Factory();
     $client->fake(['*' => Create::promiseFor(new Response(500))]);
 
-    $fixerProvider = new FixerProvider($client, ['accessKey' => 'password']);
+    $fixerProvider = new FixerProvider($client, ['access_key' => 'password']);
     $fixerProvider->getRates('EUR', currencies());
 })->throws(RequestException::class);

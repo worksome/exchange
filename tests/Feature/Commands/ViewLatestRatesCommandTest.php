@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Worksome\Exchange\Contracts\CurrencyCodeProvider;
 use Worksome\Exchange\Facades\Exchange;
 
 it('asks for a base currency if one is not provided', function () {
@@ -9,6 +10,17 @@ it('asks for a base currency if one is not provided', function () {
         ->artisan('exchange:rates', ['currencies' => ['GBP', 'USD']])
         ->expectsQuestion('Which base currency do you want to use?', 'EUR');
 });
+
+it('asks for currencies if none are provided', function () {
+    $this
+        ->artisan('exchange:rates', ['base_currency' => 'GBP'])
+        ->expectsChoice(
+            'Which currencies do you want to fetch exchange rates for?',
+            ['EUR', 'USD'],
+            $this->app->make(CurrencyCodeProvider::class)->all(),
+        );
+});
+
 
 it('fails if an invalid base currency is passed', function () {
     $this

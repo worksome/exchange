@@ -17,7 +17,7 @@ return [
         */
 
         'fixer' => [
-            'accessKey' => env('FIXER_ACCESS_KEY'),
+            'access_key' => env('FIXER_ACCESS_KEY'),
         ],
     ],
 ];

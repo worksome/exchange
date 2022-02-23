@@ -13,6 +13,7 @@ final class NullProvider implements ExchangeRateProvider
     {
         return new Rates(
             $baseCurrency,
+            // @phpstan-ignore-next-line
             array_fill_keys($currencies, 1.0),
             now()
         );

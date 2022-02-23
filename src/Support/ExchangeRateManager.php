@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Worksome\Exchange\Support;
 
-use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\Client\Factory;
 use Illuminate\Support\Manager;
 use Worksome\Exchange\ExchangeRateProviders\FixerProvider;
 use Worksome\Exchange\ExchangeRateProviders\NullProvider;
@@ -13,7 +13,7 @@ final class ExchangeRateManager extends Manager
 {
     public function getDefaultDriver(): string
     {
-        return $this->config->get('exchange.default') ?? 'null';
+        return strval($this->config->get('exchange.default') ?? 'null');
     }
 
     public function createNullDriver(): NullProvider
@@ -24,7 +24,9 @@ final class ExchangeRateManager extends Manager
     public function createFixerDriver(): FixerProvider
     {
         return new FixerProvider(
-            $this->container->make(PendingRequest::class),
+            // @phpstan-ignore-next-line
+            $this->container->make(Factory::class),
+            // @phpstan-ignore-next-line
             $this->config->get('exchange.services.fixer'),
         );
     }

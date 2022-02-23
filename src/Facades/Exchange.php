@@ -18,10 +18,10 @@ final class Exchange extends Facade
      */
     public static function fake(array $rates = []): void
     {
-        self::$app->instance(
-            \Worksome\Exchange\Exchange::class,
-            self::getFacadeRoot()
-        )->fake($rates);
+        /** @var \Worksome\Exchange\Exchange $fake */
+        $fake = self::$app->instance(\Worksome\Exchange\Exchange::class, self::getFacadeRoot());
+
+        $fake->fake($rates);
     }
 
     protected static function getFacadeAccessor(): string

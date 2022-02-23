@@ -15,13 +15,12 @@ use Worksome\Exchange\Support\Rates;
 final class FixerProvider implements ExchangeRateProvider
 {
     /**
-     * @param array{accessKey: string} $options
+     * @param array{access_key: string} $options
      */
     public function __construct(
         private Factory $client,
         private array $options,
-    )
-    {
+    ) {
     }
 
     /**
@@ -33,8 +32,9 @@ final class FixerProvider implements ExchangeRateProvider
 
         return new Rates(
             $baseCurrency,
-            collect($data->get('rates'))->map(fn(int|float $value) => floatval($value))->all(),
-            CarbonImmutable::createFromTimestamp($data->get('timestamp'))
+            // @phpstan-ignore-next-line
+            collect($data->get('rates'))->map(fn(mixed $value) => floatval($value))->all(),
+            CarbonImmutable::createFromTimestamp(intval($data->get('timestamp')))
         );
     }
 
@@ -47,7 +47,7 @@ final class FixerProvider implements ExchangeRateProvider
     {
         return $this->client()
             ->get('/latest', [
-                'access_key' => $this->options['accessKey'],
+                'access_key' => $this->options['access_key'],
                 'base' => $baseCurrency,
                 'format' => 1,
                 'symbols' => implode(',', $currencies),
