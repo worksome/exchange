@@ -1,62 +1,69 @@
-# Check Exchange Rates for any currency in Laravel.
+# Exchange - Check exchange rates for any currency in Laravel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/worksome/exchange.svg?style=flat-square)](https://packagist.org/packages/worksome/exchange)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/worksome/exchange/run-tests?label=tests)](https://github.com/worksome/exchange/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/worksome/exchange/Check%20&%20fix%20styling?label=code%20style)](https://github.com/worksome/exchange/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/worksome/exchange.svg?style=flat-square)](https://packagist.org/packages/worksome/exchange)
+If your app supports multi-currency, you'll no doubt need to check exchange rates. There are many third party services
+to accomplish this, but why bother reinventing the wheel when we've done all the hard work for you?
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/exchange.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/exchange)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+Exchange provides an abstraction layer for exchange rate APIs, with a full suite of tools for caching, testing and local
+development.
 
 ## Installation
 
-You can install the package via composer:
+You can install the package via composer.
 
 ```bash
 composer require worksome/exchange
 ```
 
-You can publish and run the migrations with:
+To install the exchange config file, you can use our `install` artisan command!
 
 ```bash
-php artisan vendor:publish --tag="exchange-migrations"
-php artisan migrate
+php artisan exchange:install
 ```
 
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="exchange-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="exchange-views"
-```
+Exchange is now installed!
 
 ## Usage
 
+You can start using Exchange right away with the `null` driver, which comes preconfigured. This will simply return `1.0` for every exchange rate, which is generally fine for local development.
+
 ```php
-$exchange = new Worksome\Exchange();
-echo $exchange->echoPhrase('Hello, Worksome!');
+use Worksome\Exchange\Facades\Exchange;
+
+$exchangeRates = Exchange::rates('USD', ['GBP', 'EUR']);
 ```
 
+In the example above, we are retrieving exchange rates for GBP and EUR based on USD. The `rates` method will return a `Worksome\Exchange\Support\Rates` object,
+which includes the base currency, retrieved rates and the time of retrieval. Retrieved rates are an `array` with currency codes as keys and exchange rates as values.
+
+```php
+$rates = $exchangeRates->getRates(); // ['GBP' => 1.0, 'EUR' => 1.0]
+```
+
+### Fixer
+
+Of course, the `null` driver isn't very useful when you want actual exchange rates. For this, you should use the `fixer` driver.
+
+In your `exchange.php` config file, set `default` to `fixer`, or set `EXCHANGE_DRIVER` to `fixer` in your `.env` file.
+Next, you'll need an access key from [https://fixer.io/dashboard](https://fixer.io/dashboard). Set `FIXER_ACCESS_KEY` to your provided
+access key from Fixer.
+
+That's it! Fixer is now configured as the default driver and running `Exchange::rates()` again will make a request to
+Fixer for up-to-date exchange rates.
+
+### Cache
+
+It's unlikely that you want to make a request to a third party service every time you call `Exchange::rates()`. To remedy
+this, we provide a cache decorator that can be used to store retrieved exchange rates for a specified period (24 hours by default).
+
+In your `exchange.php` config file, set `default` to `cache`, or set `EXCHANGE_DRIVER` to `cache` in your `.env` file.
+You'll also want to pick a strategy under `services.cache.strategy`. By default, this will be `fixer`, but you are free to change that.
+The strategy is the service that will be used to perform the exchange rate lookup when nothing is found in the cache.
+
+There is also the option to override the `ttl` (how many seconds rates are cached for) and `key` for your cached rates.
+
 ## Testing
+
+Exchange prides itself on a thorough test suite written in Pest, strict static analysis, and a very high level of code coverage. You may run these tests yourself by cloning the project and running our test script:
 
 ```bash
 composer test
@@ -66,17 +73,9 @@ composer test
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Contributing
-
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
-
 ## Credits
 
-- [Luke Downing](https://github.com/worksome)
+- [Luke Downing](https://github.com/lukeraymonddowning)
 - [All Contributors](../../contributors)
 
 ## License
