@@ -1,0 +1,75 @@
+<?php
+
+use Carbon\Carbon;
+use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Client\Request;
+use Illuminate\Http\Client\RequestException;
+use Worksome\Exchange\ExchangeRateProviders\ExchangeRateHostProvider;
+use Worksome\Exchange\Support\Rates;
+use GuzzleHttp\Promise\Create;
+use Illuminate\Http\Client\Factory;
+
+it('actually works', function () {
+    $client = new Factory();
+    $fixerProvider = new ExchangeRateHostProvider($client);
+    $rates = $fixerProvider->getRates('EUR', currencies());
+
+    expect($rates)->toBeInstanceOf(Rates::class);
+})->group('integration');
+
+it('makes a HTTP request to the correct endpoint', function () {
+    $client = new Factory();
+    $client->fake(['*' => [
+        'timestamp' => now()->subDay()->timestamp,
+        'rates' => [
+            'EUR' => 1, // Even though this is an int, it should be converted to a float
+            'GBP' => 2.5
+        ],
+    ]]);
+
+    $fixerProvider = new ExchangeRateHostProvider($client);
+    $fixerProvider->getRates('EUR', currencies());
+
+    $client->assertSent(function (Request $request) {
+        return str_starts_with($request->url(), 'https://api.exchangerate.host/latest');
+    });
+});
+
+it('returns floats for all rates', function () {
+    $client = new Factory();
+    $client->fake(['*' => [
+        'timestamp' => now()->subDay()->timestamp,
+        'rates' => [
+            'EUR' => 1, // Even though this is an int, it should be converted to a float
+            'GBP' => 2.5
+        ],
+    ]]);
+
+    $fixerProvider = new ExchangeRateHostProvider($client);
+    $rates = $fixerProvider->getRates('EUR', currencies());
+
+    expect($rates->getRates())->each->toBeFloat();
+});
+
+it('sets the returned timestamp as the retrievedAt timestamp', function () {
+    Carbon::setTestNow(now());
+
+    $client = new Factory();
+    $client->fake(['*' => [
+        'timestamp' => now()->subDay()->timestamp,
+        'rates' => [],
+    ]]);
+
+    $fixerProvider = new ExchangeRateHostProvider($client);
+    $rates = $fixerProvider->getRates('EUR', currencies());
+
+    expect($rates->getRetrievedAt()->timestamp)->toBe(now()->subDay()->timestamp);
+});
+
+it('throws a RequestException if a 500 error occurs', function () {
+    $client = new Factory();
+    $client->fake(['*' => Create::promiseFor(new Response(500))]);
+
+    $fixerProvider = new ExchangeRateHostProvider($client);
+    $fixerProvider->getRates('EUR', currencies());
+})->throws(RequestException::class);

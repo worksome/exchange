@@ -9,6 +9,7 @@ use Illuminate\Http\Client\Factory;
 use Illuminate\Support\Manager;
 use Worksome\Exchange\Exceptions\InvalidConfigurationException;
 use Worksome\Exchange\ExchangeRateProviders\CachedProvider;
+use Worksome\Exchange\ExchangeRateProviders\ExchangeRateHostProvider;
 use Worksome\Exchange\ExchangeRateProviders\FixerProvider;
 use Worksome\Exchange\ExchangeRateProviders\NullProvider;
 
@@ -36,6 +37,14 @@ final class ExchangeRateManager extends Manager
             // @phpstan-ignore-next-line
             $this->container->make(Factory::class),
             $apiKey,
+        );
+    }
+
+    public function createExchangeRateDriver(): ExchangeRateHostProvider
+    {
+        return new ExchangeRateHostProvider(
+            // @phpstan-ignore-next-line
+            $this->container->make(Factory::class),
         );
     }
 

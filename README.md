@@ -55,6 +55,16 @@ access key from Fixer.
 That's it! Fixer is now configured as the default driver and running `Exchange::rates()` again will make a request to
 Fixer for up-to-date exchange rates.
 
+### ExchangeRate
+
+[exchangerate.host](https://exchangerate.host/) is a free alternative to Fixer with an identical API spec. You 
+don't even need an API key! 
+
+In your `exchange.php` config file, set `default` to `fixer`, or set `EXCHANGE_DRIVER` to `fixer` in your `.env` file.
+
+With that task completed, you're ready to start using [exchangerate.host](https://exchangerate.host/) for retrieving up-to-date
+exchange rates.
+
 ### Cache
 
 It's unlikely that you want to make a request to a third party service every time you call `Exchange::rates()`. To remedy

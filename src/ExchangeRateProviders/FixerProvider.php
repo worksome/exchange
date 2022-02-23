@@ -17,6 +17,7 @@ final class FixerProvider implements ExchangeRateProvider
     public function __construct(
         private Factory $client,
         private string $accessKey,
+        private string $baseUrl = 'https://data.fixer.io/api',
     ) {
     }
 
@@ -56,7 +57,7 @@ final class FixerProvider implements ExchangeRateProvider
     private function client(): PendingRequest
     {
         return $this->client
-            ->baseUrl('https://data.fixer.io/api')
+            ->baseUrl($this->baseUrl)
             ->asJson()
             ->acceptJson();
     }
