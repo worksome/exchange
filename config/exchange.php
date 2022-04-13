@@ -8,7 +8,7 @@ return [
      * Go ahead and select a default exchange driver to be used when
      * looking up exchange rates.
      *
-     * Supported: 'null', 'fixer', 'exchange_rate', 'cache'
+     * Supported: 'null', 'fixer', 'exchange_rate', 'frankfurter', 'cache'
      */
 
     'default' => env('EXCHANGE_DRIVER', 'exchange_rate'),
