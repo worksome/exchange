@@ -9,6 +9,7 @@ use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
 use Worksome\Exchange\Contracts\ExchangeRateProvider;
 use Worksome\Exchange\Support\Rates;
 
@@ -31,9 +32,7 @@ final class FrankfurterProvider implements ExchangeRateProvider
             $baseCurrency,
             // @phpstan-ignore-next-line
             collect($data->get('rates'))->map(fn (mixed $value) => (float) $value)->all(),
-            CarbonImmutable::createFromFormat('Y-m-d', $data->get('date'))
-                ->timezone('Europe/Amsterdam')
-                ->setTime(16, 0, 0)
+            $this->getRetreivedAt($data),
         );
     }
 
@@ -59,5 +58,26 @@ final class FrankfurterProvider implements ExchangeRateProvider
             ->baseUrl($this->baseUrl)
             ->asJson()
             ->acceptJson();
+    }
+
+    /**
+     * @param Collection<string, mixed> $data
+     * @return CarbonImmutable
+     */
+    private function getRetreivedAt(Collection $data): CarbonImmutable
+    {
+        $date = $data->get('date');
+
+        if (! is_string($date)) {
+            throw new InvalidArgumentException('The returned date could not be parsed.');
+        }
+
+        $carbonInstance = CarbonImmutable::createFromFormat('Y-m-d', $date);
+
+        if ($carbonInstance === false) {
+            throw new InvalidArgumentException('The returned date could not be parsed.');
+        }
+
+        return $carbonInstance->timezone('Europe/Amsterdam')->setTime(16, 0, 0);
     }
 }

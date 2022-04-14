@@ -2,6 +2,11 @@
 
 All notable changes to `exchange` will be documented in this file.
 
+## v1.1.1 - 2022-04-14
+
+### Fixes
+- Fixes a small issue with types
+
 ## v1.1.0 - 2022-04-14
 
 ### Added
