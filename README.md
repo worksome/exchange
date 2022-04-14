@@ -73,6 +73,15 @@ In your `exchange.php` config file, set `default` to `exchange_rate`, or set `EX
 With that task completed, you're ready to start using [exchangerate.host](https://exchangerate.host/) for retrieving up-to-date
 exchange rates.
 
+### Frankfurter.app
+
+[frankfurter.app](https://frankfurter.app/) is an open-source API for current and historical foreign exchange rates published by the European Central Bank, which can be used without an API key.
+
+In your `exchange.php` config file, set `default` to `frankfurter`, or set `EXCHANGE_DRIVER` to `frankfurter` in your `.env` file.
+
+With that task completed, you're ready to start using [frankfurter.app](https://frankfurter.app/) for retrieving up-to-date
+exchange rates.
+
 ### Cache
 
 It's unlikely that you want to make a request to a third party service every time you call `Exchange::rates()`. To remedy
