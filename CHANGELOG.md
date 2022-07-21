@@ -2,6 +2,11 @@
 
 All notable changes to `exchange` will be documented in this file.
 
+## v1.2.0 - 2022-07-21
+
+### Changed
+- Updated console output [#8](https://github.com/worksome/exchange/pull/8)
+
 ## v1.1.1 - 2022-04-14
 
 ### Fixes
