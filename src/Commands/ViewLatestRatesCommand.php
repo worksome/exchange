@@ -64,26 +64,25 @@ final class ViewLatestRatesCommand extends Command
 
     private function renderRates(Rates $rates): void
     {
-        render(Blade::render('
-        <div>
-            <div class="my-1 w-full py-1 text-center bg-green-500 text-gray-50">
-                Exchange rates based on 1 {{ $baseCurrency }}
+        render(Blade::render(<<<'HTML'
+            <div class="mx-2 mt-1 space-y-1">
+                <header class="w-full max-w-90 text-center py-1 bg-green-500 font-bold text-gray-50">
+                    Exchange rates based on 1 {{ $baseCurrency }}
+                </header>
+                <div class="max-w-90">
+                    <div class="flex justify-between text-gray">
+                        <span>Currency</span>
+                        <span>Exchange Rate</span>
+                    </div>
+                    @foreach ($rates as $currency => $amount)
+                        <div class="flex space-x-1">
+                            <span>{{ $currency }}</span>
+                            <span class="flex-1 text-gray content-repeat-['.']"></span>
+                            <span class="text-yellow">{{ $amount }}</span>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Currency</th>
-                        <th>Exchange Rate</th>
-                    </tr>
-                </thead>
-                @foreach($rates as $currency => $amount)
-                <tr>
-                    <th class="underline">{{ $currency }}</th>
-                    <td>{{ $amount }}</td>
-                </tr>
-                @endforeach
-            </table>
-        </div>
-        ', ['baseCurrency' => $rates->getBaseCurrency(), 'rates' => $rates->getRates()]));
+        HTML, ['baseCurrency' => $rates->getBaseCurrency(), 'rates' => $rates->getRates()]));
     }
 }

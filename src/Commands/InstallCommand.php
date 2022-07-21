@@ -19,9 +19,7 @@ final class InstallCommand extends Command
     {
         $this->call('vendor:publish', ['--tag' => 'exchange-config']);
 
-        $this->newLine();
         $this->information('Alright, Exchange is installed! Try it out with `php artisan exchange:rates`.');
-        $this->newLine();
 
         return self::SUCCESS;
     }
