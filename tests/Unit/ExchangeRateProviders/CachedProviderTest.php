@@ -2,10 +2,10 @@
 
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Contracts\Cache\Repository;
+use Mockery as m;
 use Worksome\Exchange\ExchangeRateProviders\CachedProvider;
 use Worksome\Exchange\Support\Rates;
 use Worksome\Exchange\Testing\FakeExchangeRateProvider;
-use Mockery as m;
 
 it('calls the underlying strategy', function () {
     $cache = new \Illuminate\Cache\Repository(new ArrayStore());
@@ -45,5 +45,9 @@ it('generates the cache key correctly', function (string $baseCurrency, array $c
 })->with([
     ['GBP', ['EUR'], 'foo:GBP:EUR'],
     ['GBP', ['EUR', 'USD'], 'foo:GBP:EUR,USD'],
-    ['GBP', ['USD', 'EUR'], 'foo:GBP:EUR,USD'], // It should sort the order so that we don't make unnecessary requests just because the order was altered.
+    [
+        'GBP',
+        ['USD', 'EUR'],
+        'foo:GBP:EUR,USD'
+    ], // It should sort the order so that we don't make unnecessary requests just because the order was altered.
 ]);

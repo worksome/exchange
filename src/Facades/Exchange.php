@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Facade;
 use Worksome\Exchange\Support\Rates;
 
 /**
- * @method static Rates rates(string $baseCurrency, array $currencies)
- * @method static assertRetrievedRates(int $times = 1)
+ * @method static Rates  rates(string $baseCurrency, array $currencies)
+ * @method        static assertRetrievedRates(int $times = 1)
  *
  * @see \Worksome\Exchange\Exchange
  */

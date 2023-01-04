@@ -53,7 +53,9 @@ final class ViewLatestRatesCommand extends Command
         $givenCurrencies = $this->argument('currencies');
 
         return [
-            'base_currency' => $this->argument('base_currency') ?? $this->ask('Which base currency do you want to use?'),
+            'base_currency' => $this->argument('base_currency') ?? $this->ask(
+                'Which base currency do you want to use?'
+            ),
             'currencies' => count($givenCurrencies) > 0 ? $givenCurrencies : $this->choice(
                 'Which currencies do you want to fetch exchange rates for?',
                 $currencyCodeProvider->all(),

@@ -1,13 +1,13 @@
 <?php
 
 use Carbon\Carbon;
+use GuzzleHttp\Promise\Create;
 use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\Client\RequestException;
 use Worksome\Exchange\ExchangeRateProviders\ExchangeRateHostProvider;
 use Worksome\Exchange\Support\Rates;
-use GuzzleHttp\Promise\Create;
-use Illuminate\Http\Client\Factory;
 
 it('is able to make a real call to the API', function () {
     $client = new Factory();
