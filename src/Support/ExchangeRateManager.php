@@ -35,7 +35,6 @@ final class ExchangeRateManager extends Manager
         ));
 
         return new FixerProvider(
-            // @phpstan-ignore-next-line
             $this->container->make(Factory::class),
             $apiKey,
         );
@@ -44,7 +43,6 @@ final class ExchangeRateManager extends Manager
     public function createExchangeRateDriver(): ExchangeRateHostProvider
     {
         return new ExchangeRateHostProvider(
-            // @phpstan-ignore-next-line
             $this->container->make(Factory::class),
         );
     }
@@ -52,7 +50,6 @@ final class ExchangeRateManager extends Manager
     public function createFrankfurterDriver(): FrankfurterProvider
     {
         return new FrankfurterProvider(
-            // @phpstan-ignore-next-line
             $this->container->make(Factory::class),
         );
     }
@@ -60,7 +57,6 @@ final class ExchangeRateManager extends Manager
     public function createCacheDriver(): CachedProvider
     {
         return new CachedProvider(
-            // @phpstan-ignore-next-line
             $this->container->make(Repository::class),
             // @phpstan-ignore-next-line
             $this->driver($this->config->get('exchange.services.cache.strategy')),

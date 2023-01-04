@@ -47,11 +47,11 @@ final class FakeExchangeRateProvider implements ExchangeRateProvider
 
     /**
      * @param non-empty-array<int, string> $currencies
+     *
      * @return non-empty-array<string, float>
      */
     private function getRatesArray(array $currencies): array
     {
-        // @phpstan-ignore-next-line
         return array_merge(array_fill_keys($currencies, 1.0), $this->predefinedRates);
     }
 }

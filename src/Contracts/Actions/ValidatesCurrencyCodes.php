@@ -10,7 +10,9 @@ interface ValidatesCurrencyCodes
 {
     /**
      * @param non-empty-array<int, string> $currencyCodes
+     *
      * @return non-empty-array<int, string>
+     *
      * @throws InvalidCurrencyCodeException
      */
     public function __invoke(array $currencyCodes): array;

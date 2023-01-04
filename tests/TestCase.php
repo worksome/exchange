@@ -17,7 +17,9 @@ class TestCase extends Orchestra
         Termwind::renderUsing(new BufferedOutput());
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Worksome\\Exchange\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'Worksome\\Exchange\\Database\\Factories\\' . class_basename(
+                $modelName
+            ) . 'Factory'
         );
     }
 
