@@ -23,7 +23,6 @@ final class CachedProvider implements ExchangeRateProvider
     {
         $currenciesForKey = implode(',', Arr::sort($currencies));
 
-        // @phpstan-ignore-next-line
         return $this->cache->remember(
             "{$this->key}:{$baseCurrency}:{$currenciesForKey}",
             $this->ttl,

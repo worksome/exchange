@@ -13,7 +13,7 @@ it('asks for a base currency if one is not provided', function () {
 
 it('asks for currencies if none are provided', function () {
     $this
-        ->artisan('exchange:rates', ['base_currency' => 'GBP'])
+        ->artisan('exchange:rates', ['base-currency' => 'GBP'])
         ->expectsChoice(
             'Which currencies do you want to fetch exchange rates for?',
             ['EUR', 'USD'],
@@ -24,13 +24,13 @@ it('asks for currencies if none are provided', function () {
 
 it('fails if an invalid base currency is passed', function () {
     $this
-        ->artisan('exchange:rates', ['base_currency' => 'FOO', 'currencies' => ['GBP', 'USD']])
+        ->artisan('exchange:rates', ['base-currency' => 'FOO', 'currencies' => ['GBP', 'USD']])
         ->assertFailed();
 });
 
 it('fails if an invalid conversion currency is passed', function () {
     $this
-        ->artisan('exchange:rates', ['base_currency' => 'GBP', 'currencies' => ['FOO', 'USD']])
+        ->artisan('exchange:rates', ['base-currency' => 'GBP', 'currencies' => ['FOO', 'USD']])
         ->assertFailed();
 });
 
@@ -38,7 +38,7 @@ it('retrieves rates using the ExchangeRateProvider', function () {
     Exchange::fake(['GBP' => 1.2]);
 
     $this
-        ->artisan('exchange:rates', ['base_currency' => 'GBP', 'currencies' => ['EUR', 'USD']])
+        ->artisan('exchange:rates', ['base-currency' => 'GBP', 'currencies' => ['EUR', 'USD']])
         ->assertSuccessful();
 
     Exchange::assertRetrievedRates();

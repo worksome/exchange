@@ -19,7 +19,7 @@ final class ViewLatestRatesCommand extends Command
     use HasUsefulConsoleMethods;
 
     public $signature = 'exchange:rates
-        {base_currency? : The base currency to convert from.}
+        {base-currency? : The base currency to convert from.}
         {currencies?* : Any number of currencies to fetch exchange rates for.}';
 
     public $description = 'Retrieve exchange rates for a given set of currencies.';
@@ -53,7 +53,7 @@ final class ViewLatestRatesCommand extends Command
         $givenCurrencies = $this->argument('currencies');
 
         return [
-            'base_currency' => $this->argument('base_currency') ?? $this->ask(
+            'base_currency' => $this->argument('base-currency') ?? $this->ask(
                 'Which base currency do you want to use?'
             ),
             'currencies' => count($givenCurrencies) > 0 ? $givenCurrencies : $this->choice(

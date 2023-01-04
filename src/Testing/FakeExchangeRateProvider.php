@@ -52,7 +52,6 @@ final class FakeExchangeRateProvider implements ExchangeRateProvider
      */
     private function getRatesArray(array $currencies): array
     {
-        // @phpstan-ignore-next-line
         return array_merge(array_fill_keys($currencies, 1.0), $this->predefinedRates);
     }
 }
