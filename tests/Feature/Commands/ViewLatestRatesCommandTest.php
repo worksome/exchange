@@ -21,7 +21,6 @@ it('asks for currencies if none are provided', function () {
         );
 });
 
-
 it('fails if an invalid base currency is passed', function () {
     $this
         ->artisan('exchange:rates', ['base-currency' => 'FOO', 'currencies' => ['GBP', 'USD']])

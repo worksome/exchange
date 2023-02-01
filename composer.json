@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "illuminate/contracts": "^9.46|^10.0",
+        "illuminate/contracts": "^9.49|^10.0",
         "nunomaduro/termwind": "^v1.15",
         "spatie/laravel-package-tools": "^1.14"
     },
