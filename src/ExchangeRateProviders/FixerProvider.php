@@ -50,6 +50,7 @@ final class FixerProvider implements ExchangeRateProvider
                 'access_key' => $this->accessKey,
                 'base' => $baseCurrency,
                 'format' => 1,
+                'source' => config('exchange.services.exchangerate.source', 'ecb'),
                 'symbols' => implode(',', $currencies),
             ])
             ->throw()
