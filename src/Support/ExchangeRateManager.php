@@ -9,6 +9,7 @@ use Illuminate\Http\Client\Factory;
 use Illuminate\Support\Manager;
 use Worksome\Exchange\Exceptions\InvalidConfigurationException;
 use Worksome\Exchange\ExchangeRateProviders\CachedProvider;
+use Worksome\Exchange\ExchangeRateProviders\CurrencyGEOProvider;
 use Worksome\Exchange\ExchangeRateProviders\ExchangeRateHostProvider;
 use Worksome\Exchange\ExchangeRateProviders\FixerProvider;
 use Worksome\Exchange\ExchangeRateProviders\FrankfurterProvider;
@@ -49,6 +50,20 @@ final class ExchangeRateManager extends Manager
         ));
 
         return new ExchangeRateHostProvider(
+            $this->container->make(Factory::class),
+            $apiKey,
+        );
+    }
+
+    public function createCurrencyGeoDriver(): CurrencyGEOProvider
+    {
+        $apiKey = $this->config->get('exchange.services.currency_geo.access_key');
+
+        throw_unless(is_string($apiKey), new InvalidConfigurationException(
+            'You haven\'t set up an API key for CurrencyGEO!'
+        ));
+
+        return new CurrencyGEOProvider(
             $this->container->make(Factory::class),
             $apiKey,
         );

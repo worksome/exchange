@@ -47,6 +47,21 @@ return [
 
         /*
         |--------------------------------------------------------------------------
+        | CurrencyGeo.com
+        |--------------------------------------------------------------------------
+        |
+        | CurrencyGeo is a paid service for converting currency codes. To use CurrencyGeo, you'll
+        | need an API Access Key from the CurrencyGeo dashboard. Set that here, and then
+        | change the 'default' to 'exchange_rate' or set EXCHANGE_DRIVER to 'exchange_rate'.
+        |
+        */
+
+        'currency_geo' => [
+            'access_key' => env('CURRENCY_GEO_ACCESS_KEY'),
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
         | Cache
         |--------------------------------------------------------------------------
         |
