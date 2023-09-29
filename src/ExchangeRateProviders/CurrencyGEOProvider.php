@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Worksome\Exchange\ExchangeRateProviders;
 
-use Carbon\CarbonImmutable;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
@@ -16,9 +15,10 @@ final class CurrencyGEOProvider implements ExchangeRateProvider
 {
     public function __construct(
         private Factory $client,
-        private string $accessKey,
-        private string $baseUrl = 'https://api.getgeoapi.com/v2',
-    ) {
+        private string  $accessKey,
+        private string  $baseUrl = 'https://api.getgeoapi.com/v2',
+    )
+    {
     }
 
     /**
@@ -26,6 +26,16 @@ final class CurrencyGEOProvider implements ExchangeRateProvider
      */
     public function getRates(string $baseCurrency, array $currencies): Rates
     {
+        // if its the same currency return it.
+        if (sizeof($currencies) == 0 || (sizeof($currencies) == 1 && $baseCurrency == $currencies[0])) {
+            return new Rates(
+                $baseCurrency,
+                // @phpstan-ignore-next-line
+                [$baseCurrency => 1],
+                now(),
+            );
+        }
+
         $data = $this->makeRequest($baseCurrency, $currencies);
 
         return new Rates(
