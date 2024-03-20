@@ -2,6 +2,10 @@
 
 All notable changes to `exchange` will be documented in this file.
 
+## v1.3.2 - to be released [#16](https://github.com/worksome/exchange/pull/16)
+
+Add 'source' parameter to exchangerate.host API 
+
 ## v1.2.0 - 2022-07-21
 
 ### Changed
