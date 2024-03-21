@@ -14,7 +14,7 @@ final class ExchangeRateHostProvider implements ExchangeRateProvider
 
     public function __construct(private Factory $client)
     {
-        $this->fixerProvider = new FixerProvider($this->client, 'https://api.exchangerate.host');
+        $this->fixerProvider = new FixerProvider($this->client, '', 'https://api.exchangerate.host');
     }
 
     public function getRates(string $baseCurrency, array $currencies): Rates
