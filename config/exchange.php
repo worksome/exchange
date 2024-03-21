@@ -46,6 +46,7 @@ return [
             'strategy' => 'exchange_rate',
             'ttl' => 60 * 60 * 24, // 24 hours
             'key' => 'cached_exchange_rates',
+            'store' => null,
         ],
     ],
 

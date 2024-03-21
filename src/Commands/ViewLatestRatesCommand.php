@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Worksome\Exchange\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Blade;
+use Illuminate\View\Compilers\BladeCompiler;
 use Worksome\Exchange\Commands\Concerns\HasUsefulConsoleMethods;
 use Worksome\Exchange\Contracts\CurrencyCodeProvider;
 use Worksome\Exchange\Exceptions\InvalidCurrencyCodeException;
@@ -66,7 +66,7 @@ final class ViewLatestRatesCommand extends Command
 
     private function renderRates(Rates $rates): void
     {
-        render(Blade::render(<<<'HTML'
+        render(BladeCompiler::render(<<<'HTML'
             <div class="mx-2 mt-1 space-y-1">
                 <header class="w-full max-w-90 text-center py-1 bg-green-500 font-bold text-gray-50">
                     Exchange rates based on 1 {{ $baseCurrency }}
