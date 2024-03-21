@@ -32,6 +32,21 @@ return [
 
         /*
         |--------------------------------------------------------------------------
+        | ExchangeRate.host
+        |--------------------------------------------------------------------------
+        |
+        | ExchangeRate is a paid service for converting currency codes. To use ExchangeRate, you'll
+        | need an API Access Key from the ExchangeRate dashboard. Set that here, and then
+        | change the 'default' to 'exchange_rate' or set EXCHANGE_DRIVER to 'exchange_rate'.
+        |
+        */
+
+        'exchange_rate' => [
+            'access_key' => env('EXCHANGE_RATE_ACCESS_KEY'),
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
         | Cache
         |--------------------------------------------------------------------------
         |
