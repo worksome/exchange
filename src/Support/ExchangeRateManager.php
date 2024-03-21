@@ -43,15 +43,8 @@ final class ExchangeRateManager extends Manager
 
     public function createExchangeRateDriver(): ExchangeRateHostProvider
     {
-        $apiKey = $this->config->get('exchange.services.exchange_rate.access_key');
-
-        throw_unless(is_string($apiKey), new InvalidConfigurationException(
-            'You haven\'t set up an API key for ExchangeRate!'
-        ));
-
         return new ExchangeRateHostProvider(
             $this->container->make(Factory::class),
-            $apiKey,
         );
     }
 
