@@ -3,6 +3,7 @@
 use Worksome\Exchange\Contracts\ExchangeRateProvider;
 use Worksome\Exchange\Exceptions\InvalidConfigurationException;
 use Worksome\Exchange\ExchangeRateProviders\CachedProvider;
+use Worksome\Exchange\ExchangeRateProviders\CurrencyGEOProvider;
 use Worksome\Exchange\ExchangeRateProviders\ExchangeRateHostProvider;
 use Worksome\Exchange\ExchangeRateProviders\FixerProvider;
 use Worksome\Exchange\ExchangeRateProviders\FrankfurterProvider;
@@ -25,6 +26,7 @@ it('can instantiate all drivers', function (string $driver, string $expectedClas
     ['fixer', FixerProvider::class],
     ['exchange_rate', ExchangeRateHostProvider::class],
     ['frankfurter', FrankfurterProvider::class],
+    ['currency_geo', CurrencyGEOProvider::class],
     ['cache', CachedProvider::class],
 ]);
 
@@ -43,3 +45,10 @@ it('will throw the right exception if no fixer API key has been configured', fun
     $manager = new ExchangeRateManager($this->app);
     $manager->driver('fixer');
 })->throws(InvalidConfigurationException::class, 'You haven\'t set up an API key for Fixer!');
+
+it('will throw the right exception if no geo currency API key has been configured', function () {
+    config()->set('exchange.services.currency_geo.access_key', null);
+
+    $manager = new ExchangeRateManager($this->app);
+    $manager->driver('currency_geo');
+})->throws(InvalidConfigurationException::class, 'You haven\'t set up an API key for CurrencyGEO!');
