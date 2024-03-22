@@ -65,21 +65,21 @@ Fixer for up-to-date exchange rates.
 
 ### ExchangeRate.host
 
-[exchangerate.host](https://exchangerate.host/) is a free alternative to Fixer with an identical API spec. You 
-don't even need an API key! 
+[exchangerate.host](https://exchangerate.host) is an alternative to Fixer with an identical API spec.
 
 In your `exchange.php` config file, set `default` to `exchange_rate`, or set `EXCHANGE_DRIVER` to `exchange_rate` in your `.env` file.
+Set `EXCHANGE_RATE_ACCESS_KEY` to your provided access key from exchangerate.host.
 
-With that task completed, you're ready to start using [exchangerate.host](https://exchangerate.host/) for retrieving up-to-date
+With that task completed, you're ready to start using [exchangerate.host](https://exchangerate.host) for retrieving up-to-date
 exchange rates.
 
 ### Frankfurter.app
 
-[frankfurter.app](https://frankfurter.app/) is an open-source API for current and historical foreign exchange rates published by the European Central Bank, which can be used without an API key.
+[frankfurter.app](https://frankfurter.app) is an open-source API for current and historical foreign exchange rates published by the European Central Bank, which can be used without an API key.
 
 In your `exchange.php` config file, set `default` to `frankfurter`, or set `EXCHANGE_DRIVER` to `frankfurter` in your `.env` file.
 
-With that task completed, you're ready to start using [frankfurter.app](https://frankfurter.app/) for retrieving up-to-date
+With that task completed, you're ready to start using [frankfurter.app](https://frankfurter.app) for retrieving up-to-date
 exchange rates.
 
 ### Cache

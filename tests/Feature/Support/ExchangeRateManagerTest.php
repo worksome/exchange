@@ -11,6 +11,7 @@ use Worksome\Exchange\Support\ExchangeRateManager;
 
 beforeEach(function () {
     config()->set('exchange.services.fixer.access_key', 'password');
+    config()->set('exchange.services.exchange_rate.access_key', 'password');
 });
 
 it('can instantiate all drivers', function (string $driver, string $expectedClass) {

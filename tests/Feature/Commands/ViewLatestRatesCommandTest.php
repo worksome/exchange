@@ -33,7 +33,7 @@ it('fails if an invalid conversion currency is passed', function () {
         ->assertFailed();
 });
 
-it('retrieves rates using the ExchangeRateProvider', function () {
+it('retrieves rates using the default provider', function () {
     Exchange::fake(['GBP' => 1.2]);
 
     $this
