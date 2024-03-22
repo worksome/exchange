@@ -2,8 +2,10 @@
 
 Check exchange rates for any currency in Laravel
 
-[![Tests](https://github.com/worksome/exchange/actions/workflows/run-tests.yml/badge.svg)](https://github.com/worksome/exchange/actions/workflows/run-tests.yml)
-[![PHPStan](https://github.com/worksome/exchange/actions/workflows/phpstan.yml/badge.svg)](https://github.com/worksome/exchange/actions/workflows/phpstan.yml)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/worksome/exchange.svg?style=flat-square)](https://packagist.org/packages/worksome/exchange)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/worksome/exchange/tests.yml?branch=main&style=flat-square&label=Tests)](https://github.com/worksome/exchange/actions?query=workflow%3ATests+branch%3Amain)
+[![GitHub Static Analysis Action Status](https://img.shields.io/github/actions/workflow/status/worksome/exchange/static.yml?branch=main&style=flat-square&label=Static%20Analysis)](https://github.com/worksome/exchange/actions?query=workflow%3A"Static%20Analysis"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/worksome/exchange.svg?style=flat-square)](https://packagist.org/packages/worksome/exchange)
 
 If your app supports multi-currency, you'll no doubt need to check exchange rates. There are many third party services
 to accomplish this, but why bother reinventing the wheel when we've done all the hard work for you?
@@ -65,21 +67,21 @@ Fixer for up-to-date exchange rates.
 
 ### ExchangeRate.host
 
-[exchangerate.host](https://exchangerate.host/) is a free alternative to Fixer with an identical API spec. You 
-don't even need an API key! 
+[exchangerate.host](https://exchangerate.host) is an alternative to Fixer with an identical API spec.
 
 In your `exchange.php` config file, set `default` to `exchange_rate`, or set `EXCHANGE_DRIVER` to `exchange_rate` in your `.env` file.
+Set `EXCHANGE_RATE_ACCESS_KEY` to your provided access key from exchangerate.host.
 
-With that task completed, you're ready to start using [exchangerate.host](https://exchangerate.host/) for retrieving up-to-date
+With that task completed, you're ready to start using [exchangerate.host](https://exchangerate.host) for retrieving up-to-date
 exchange rates.
 
 ### Frankfurter.app
 
-[frankfurter.app](https://frankfurter.app/) is an open-source API for current and historical foreign exchange rates published by the European Central Bank, which can be used without an API key.
+[frankfurter.app](https://frankfurter.app) is an open-source API for current and historical foreign exchange rates published by the European Central Bank, which can be used without an API key.
 
 In your `exchange.php` config file, set `default` to `frankfurter`, or set `EXCHANGE_DRIVER` to `frankfurter` in your `.env` file.
 
-With that task completed, you're ready to start using [frankfurter.app](https://frankfurter.app/) for retrieving up-to-date
+With that task completed, you're ready to start using [frankfurter.app](https://frankfurter.app) for retrieving up-to-date
 exchange rates.
 
 ### Cache
@@ -91,7 +93,7 @@ In your `exchange.php` config file, set `default` to `cache`, or set `EXCHANGE_D
 You'll also want to pick a strategy under `services.cache.strategy`. By default, this will be `fixer`, but you are free to change that.
 The strategy is the service that will be used to perform the exchange rate lookup when nothing is found in the cache.
 
-There is also the option to override the `ttl` (how many seconds rates are cached for) and `key` for your cached rates.
+There is also the option to override the `ttl` (how many seconds rates are cached for), `key` for your cached rates, and the `store`.
 
 ## Artisan
 
@@ -130,7 +132,7 @@ composer test
 
 ## Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please see [GitHub Releases](https://github.com/worksome/exchange/releases) for more information on what has changed recently.
 
 ## Credits
 

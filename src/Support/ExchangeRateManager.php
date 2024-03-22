@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Worksome\Exchange\Support;
 
-use Illuminate\Cache\Repository;
+use Illuminate\Contracts\Cache\Factory as CacheFactory;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Support\Manager;
 use Worksome\Exchange\Exceptions\InvalidConfigurationException;
@@ -43,8 +43,15 @@ final class ExchangeRateManager extends Manager
 
     public function createExchangeRateDriver(): ExchangeRateHostProvider
     {
+        $apiKey = $this->config->get('exchange.services.exchange_rate.access_key');
+
+        throw_unless(is_string($apiKey), new InvalidConfigurationException(
+            'You haven\'t set up an API key for ExchangeRate!'
+        ));
+
         return new ExchangeRateHostProvider(
             $this->container->make(Factory::class),
+            $apiKey,
         );
     }
 
@@ -71,8 +78,12 @@ final class ExchangeRateManager extends Manager
 
     public function createCacheDriver(): CachedProvider
     {
+        /** @var CacheFactory $factory */
+        $factory = $this->container->make(CacheFactory::class);
+
         return new CachedProvider(
-            $this->container->make(Repository::class),
+            // @phpstan-ignore-next-line
+            $factory->store($this->config->get('exchange.services.cache.store')),
             // @phpstan-ignore-next-line
             $this->driver($this->config->get('exchange.services.cache.strategy')),
             strval($this->config->get('exchange.services.cache.key', 'cached_exchange_rates')),

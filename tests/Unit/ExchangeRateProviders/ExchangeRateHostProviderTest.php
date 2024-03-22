@@ -11,11 +11,13 @@ use Worksome\Exchange\Support\Rates;
 
 it('is able to make a real call to the API', function () {
     $client = new Factory();
-    $fixerProvider = new ExchangeRateHostProvider($client);
+    $fixerProvider = new ExchangeRateHostProvider($client, getenv('EXCHANGE_RATE_ACCESS_KEY'));
     $rates = $fixerProvider->getRates('EUR', currencies());
 
     expect($rates)->toBeInstanceOf(Rates::class);
-})->group('integration');
+})
+    ->skip(getenv('EXCHANGE_RATE_ACCESS_KEY') === false, 'No EXCHANGE_RATE_ACCESS_KEY was defined.')
+    ->group('integration');
 
 it('makes a HTTP request to the correct endpoint', function () {
     $client = new Factory();
@@ -27,7 +29,7 @@ it('makes a HTTP request to the correct endpoint', function () {
         ],
     ]]);
 
-    $fixerProvider = new ExchangeRateHostProvider($client);
+    $fixerProvider = new ExchangeRateHostProvider($client, 'password');
     $fixerProvider->getRates('EUR', currencies());
 
     $client->assertSent(function (Request $request) {
@@ -45,7 +47,7 @@ it('returns floats for all rates', function () {
         ],
     ]]);
 
-    $fixerProvider = new ExchangeRateHostProvider($client);
+    $fixerProvider = new ExchangeRateHostProvider($client, 'password');
     $rates = $fixerProvider->getRates('EUR', currencies());
 
     expect($rates->getRates())->each->toBeFloat();
@@ -60,7 +62,7 @@ it('sets the returned timestamp as the retrievedAt timestamp', function () {
         'rates' => [],
     ]]);
 
-    $fixerProvider = new ExchangeRateHostProvider($client);
+    $fixerProvider = new ExchangeRateHostProvider($client, 'password');
     $rates = $fixerProvider->getRates('EUR', currencies());
 
     expect($rates->getRetrievedAt()->timestamp)->toBe(now()->subDay()->timestamp);
@@ -70,6 +72,6 @@ it('throws a RequestException if a 500 error occurs', function () {
     $client = new Factory();
     $client->fake(['*' => Create::promiseFor(new Response(500))]);
 
-    $fixerProvider = new ExchangeRateHostProvider($client);
+    $fixerProvider = new ExchangeRateHostProvider($client, 'password');
     $fixerProvider->getRates('EUR', currencies());
 })->throws(RequestException::class);

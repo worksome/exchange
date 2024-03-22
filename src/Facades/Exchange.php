@@ -20,7 +20,11 @@ final class Exchange extends Facade
      */
     public static function fake(array $rates = []): void
     {
-        /** @var \Worksome\Exchange\Exchange $fake */
+        /**
+         * @var \Worksome\Exchange\Exchange $fake
+         *
+         * @phpstan-ignore-next-line
+         */
         $fake = self::$app->instance(\Worksome\Exchange\Exchange::class, self::getFacadeRoot());
 
         $fake->fake($rates);

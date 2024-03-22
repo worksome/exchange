@@ -1,4 +1,4 @@
-name: PHPStan
+name: Static Analysis
 
 on:
   push:
@@ -8,10 +8,10 @@ on:
 
 jobs:
   phpstan:
-    name: phpstan
+    name: PHPStan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -20,7 +20,7 @@ jobs:
           coverage: none
 
       - name: Install composer dependencies
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@v3
 
       - name: Run PHPStan
         run: composer test:types
