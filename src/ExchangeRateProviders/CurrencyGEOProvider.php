@@ -32,7 +32,7 @@ final class CurrencyGEOProvider implements ExchangeRateProvider
                 $baseCurrency,
                 // @phpstan-ignore-next-line
                 [$baseCurrency => 1],
-                now(),
+                now()->startOfDay(),
             );
         }
 
@@ -42,7 +42,7 @@ final class CurrencyGEOProvider implements ExchangeRateProvider
             $baseCurrency,
             // @phpstan-ignore-next-line
             collect($data->get('rates'))->map(fn(mixed $value) => floatval($value['rate']))->all(),
-            now(),
+            now()->startOfDay(),
         );
     }
 
