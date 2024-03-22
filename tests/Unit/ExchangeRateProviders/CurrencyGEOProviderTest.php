@@ -24,8 +24,16 @@ it('makes a HTTP request to the correct endpoint', function () {
     $client->fake(['*' => [
         'timestamp' => now()->subDay()->timestamp,
         'rates' => [
-            'EUR' => 1, // Even though this is an int, it should be converted to a float
-            'GBP' => 2.5
+            'EUR' => [
+                'currency_name' => 'Euro',
+                'rate' => 1,
+                'rate_for_amount' => 1,
+            ],
+            'GBP' => [
+                'currency_name' => 'Pound sterling',
+                'rate' => 2.5,
+                'rate_for_amount' => 2.5,
+            ],
         ],
     ]]);
 
@@ -42,8 +50,16 @@ it('returns floats for all rates', function () {
     $client->fake(['*' => [
         'timestamp' => now()->subDay()->timestamp,
         'rates' => [
-            'EUR' => 1, // Even though this is an int, it should be converted to a float
-            'GBP' => 2.5
+            'EUR' => [
+                'currency_name' => 'Euro',
+                'rate' => 1,
+                'rate_for_amount' => 1,
+            ],
+            'GBP' => [
+                'currency_name' => 'Pound sterling',
+                'rate' => 2.5,
+                'rate_for_amount' => 2.5,
+            ],
         ],
     ]]);
 

@@ -77,10 +77,10 @@ exchange rates.
 
 ### Currency.GetGeoApi.com
 
-[Currency.GetGeoApi.com](https://currency.getgeoapi.com) is an alternative option you can use with suitable free quota.
+[Currency.GetGeoApi.com](https://currency.getgeoapi.com) is an alternative option you can use with a free quota.
 
 In your `exchange.php` config file, set `default` to `currency_geo`, or set `EXCHANGE_DRIVER` to `currency_geo` in your `.env` file.
-Set `CURRENCY_GEO_ACCESS_KEY` to your provided access key from Currency.GetGeoApi.com.
+Set `CURRENCY_GEO_ACCESS_KEY` to your provided access key from currency.getgeoapi.com.
 
 With that task completed, you're ready to start using [Currency.GetGeoApi.com](https://currency.getgeoapi.com) for retrieving up-to-date
 exchange rates.

@@ -15,10 +15,9 @@ final class CurrencyGEOProvider implements ExchangeRateProvider
 {
     public function __construct(
         private Factory $client,
-        private string  $accessKey,
-        private string  $baseUrl = 'https://api.getgeoapi.com/v2',
-    )
-    {
+        private string $accessKey,
+        private string $baseUrl = 'https://api.getgeoapi.com/v2',
+    ) {
     }
 
     /**
@@ -26,11 +25,10 @@ final class CurrencyGEOProvider implements ExchangeRateProvider
      */
     public function getRates(string $baseCurrency, array $currencies): Rates
     {
-        // if its the same currency return it.
-        if (sizeof($currencies) == 0 || (sizeof($currencies) == 1 && $baseCurrency == $currencies[0])) {
+        // If it's the same currency return it.
+        if (count($currencies) === 1 && $baseCurrency === $currencies[0]) {
             return new Rates(
                 $baseCurrency,
-                // @phpstan-ignore-next-line
                 [$baseCurrency => 1],
                 now()->startOfDay(),
             );
@@ -41,7 +39,7 @@ final class CurrencyGEOProvider implements ExchangeRateProvider
         return new Rates(
             $baseCurrency,
             // @phpstan-ignore-next-line
-            collect($data->get('rates'))->map(fn(mixed $value) => floatval($value['rate']))->all(),
+            collect($data->get('rates'))->map(fn (mixed $value) => floatval($value['rate']))->all(),
             now()->startOfDay(),
         );
     }
