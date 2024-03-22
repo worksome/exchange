@@ -11,7 +11,7 @@ return [
      * Supported: 'null', 'fixer', 'exchange_rate', 'frankfurter', 'cache'
      */
 
-    'default' => env('EXCHANGE_DRIVER', 'exchange_rate'),
+    'default' => env('EXCHANGE_DRIVER', 'frankfurter'),
 
     'services' => [
 
@@ -58,10 +58,10 @@ return [
         */
 
         'cache' => [
-            'strategy' => 'exchange_rate',
-            'ttl' => 60 * 60 * 24, // 24 hours
-            'key' => 'cached_exchange_rates',
-            'store' => null,
+            'strategy' => env('EXCHANGE_RATES_CACHE_STRATEGY', 'frankfurter'),
+            'ttl' => env('EXCHANGE_RATES_CACHE_TTL', 60 * 60 * 24), // 24 hours
+            'key' => env('EXCHANGE_RATES_CACHE_KEY', 'cached_exchange_rates'),
+            'store' => env('EXCHANGE_RATES_CACHE_STORE'),
         ],
     ],
 
