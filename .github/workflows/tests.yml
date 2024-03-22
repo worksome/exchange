@@ -13,6 +13,7 @@ jobs:
       # Fixer and ExchangeRate.host use the same API token
       FIXER_ACCESS_KEY: ${{ secrets.FIXER_ACCESS_KEY }}
       EXCHANGE_RATE_ACCESS_KEY: ${{ secrets.FIXER_ACCESS_KEY }}
+      CURRENCY_GEO_ACCESS_KEY: ${{ secrets.CURRENCY_GEO_ACCESS_KEY }}
     strategy:
       fail-fast: true
       matrix:

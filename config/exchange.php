@@ -8,7 +8,7 @@ return [
      * Go ahead and select a default exchange driver to be used when
      * looking up exchange rates.
      *
-     * Supported: 'null', 'fixer', 'exchange_rate', 'frankfurter', 'cache'
+     * Supported: 'null', 'fixer', 'exchange_rate', 'frankfurter', 'currency_geo', 'cache'
      */
 
     'default' => env('EXCHANGE_DRIVER', 'frankfurter'),
@@ -43,6 +43,21 @@ return [
 
         'exchange_rate' => [
             'access_key' => env('EXCHANGE_RATE_ACCESS_KEY'),
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | CurrencyGeo.com
+        |--------------------------------------------------------------------------
+        |
+        | CurrencyGeo is a paid service for converting currency codes. To use CurrencyGeo, you'll
+        | need an API Access Key from the CurrencyGeo dashboard. Set that here, and then change
+        | the 'default' to 'currency_geo' or set EXCHANGE_DRIVER to 'currency_geo'.
+        |
+        */
+
+        'currency_geo' => [
+            'access_key' => env('CURRENCY_GEO_ACCESS_KEY'),
         ],
 
         /*

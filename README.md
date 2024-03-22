@@ -75,6 +75,16 @@ Set `EXCHANGE_RATE_ACCESS_KEY` to your provided access key from exchangerate.hos
 With that task completed, you're ready to start using [exchangerate.host](https://exchangerate.host) for retrieving up-to-date
 exchange rates.
 
+### Currency.GetGeoApi.com
+
+[Currency.GetGeoApi.com](https://currency.getgeoapi.com) is an alternative option you can use with a free quota.
+
+In your `exchange.php` config file, set `default` to `currency_geo`, or set `EXCHANGE_DRIVER` to `currency_geo` in your `.env` file.
+Set `CURRENCY_GEO_ACCESS_KEY` to your provided access key from currency.getgeoapi.com.
+
+With that task completed, you're ready to start using [Currency.GetGeoApi.com](https://currency.getgeoapi.com) for retrieving up-to-date
+exchange rates.
+
 ### Frankfurter.app
 
 [frankfurter.app](https://frankfurter.app) is an open-source API for current and historical foreign exchange rates published by the European Central Bank, which can be used without an API key.
