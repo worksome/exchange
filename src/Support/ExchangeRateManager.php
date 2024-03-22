@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Worksome\Exchange\Support;
 
-use Illuminate\Cache\Repository;
 use Illuminate\Contracts\Cache\Factory as CacheFactory;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Support\Manager;
