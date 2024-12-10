@@ -31,7 +31,7 @@ it('makes a HTTP request to the correct endpoint', function () {
     $fixerProvider->getRates('EUR', currencies());
 
     $client->assertSent(function (Request $request) {
-        return str_starts_with($request->url(), 'https://api.frankfurter.app/latest');
+        return str_starts_with($request->url(), 'https://api.frankfurter.dev/v1/latest');
     });
 });
 
