@@ -17,7 +17,7 @@ final class FrankfurterProvider implements ExchangeRateProvider
 {
     public function __construct(
         private Factory $client,
-        private string $baseUrl = 'https://api.frankfurter.app',
+        private string $baseUrl = 'https://api.frankfurter.dev/v1',
     ) {
     }
 
