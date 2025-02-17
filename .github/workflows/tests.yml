@@ -2,30 +2,35 @@ name: Tests
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+
     env:
-      # Fixer and ExchangeRate.host use the same API token
       FIXER_ACCESS_KEY: ${{ secrets.FIXER_ACCESS_KEY }}
       EXCHANGE_RATE_ACCESS_KEY: ${{ secrets.FIXER_ACCESS_KEY }}
       CURRENCY_GEO_ACCESS_KEY: ${{ secrets.CURRENCY_GEO_ACCESS_KEY }}
+
     strategy:
       fail-fast: true
       matrix:
         os: [ubuntu-latest, windows-latest]
         php: [8.2, 8.3]
-        laravel: [10.*, 11.*]
+        laravel: ['10.*', '11.*', '12.*']
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: 10.*
             testbench: 8.*
           - laravel: 11.*
             testbench: 9.*
+          - laravel: 12.*
+            testbench: 10.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
