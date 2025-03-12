@@ -89,5 +89,5 @@ return [
          */
         'about_command' => true,
 
-    ]
+    ],
 ];

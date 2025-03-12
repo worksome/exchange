@@ -9,25 +9,20 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
-    env:
-      # Fixer and ExchangeRate.host use the same API token
-      FIXER_ACCESS_KEY: ${{ secrets.FIXER_ACCESS_KEY }}
-      EXCHANGE_RATE_ACCESS_KEY: ${{ secrets.FIXER_ACCESS_KEY }}
-      CURRENCY_GEO_ACCESS_KEY: ${{ secrets.CURRENCY_GEO_ACCESS_KEY }}
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        php: [8.2, 8.3]
-        laravel: [10.*, 11.*]
+        os: [ubuntu-latest]
+        php: [8.4, 8.3]
+        laravel: [12.*, 11.*]
         stability: [prefer-lowest, prefer-stable]
         include:
-          - laravel: 10.*
-            testbench: 8.*
+          - laravel: 12.*
+            testbench: 10.*
           - laravel: 11.*
             testbench: 9.*
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
@@ -37,7 +32,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: none
 
       - name: Setup problem matchers
@@ -47,11 +41,16 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update --ansi
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction --ansi
 
       - name: Execute tests
         run: composer test:unit
 
       - name: Execute integration tests
-        run: vendor/bin/pest --group=integration
+        run: composer test:unit -- --group=integration
+        env:
+          # Fixer and ExchangeRate.host use the same API token
+          FIXER_ACCESS_KEY: ${{ secrets.FIXER_ACCESS_KEY }}
+          EXCHANGE_RATE_ACCESS_KEY: ${{ secrets.FIXER_ACCESS_KEY }}
+          CURRENCY_GEO_ACCESS_KEY: ${{ secrets.CURRENCY_GEO_ACCESS_KEY }}

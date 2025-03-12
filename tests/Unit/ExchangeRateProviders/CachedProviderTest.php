@@ -48,6 +48,6 @@ it('generates the cache key correctly', function (string $baseCurrency, array $c
     [
         'GBP',
         ['USD', 'EUR'],
-        'foo:GBP:EUR,USD'
+        'foo:GBP:EUR,USD',
     ], // It should sort the order so that we don't make unnecessary requests just because the order was altered.
 ]);

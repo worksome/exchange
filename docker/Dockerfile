@@ -1,4 +1,4 @@
-FROM php:8.2-cli-alpine
+FROM php:8.3-cli-alpine
 
 RUN apk add --no-cache $PHPIZE_DEPS linux-headers
 RUN pecl install xdebug
