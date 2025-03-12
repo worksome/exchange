@@ -31,7 +31,7 @@ final class FixerProvider implements ExchangeRateProvider
         return new Rates(
             $baseCurrency,
             // @phpstan-ignore-next-line
-            collect($data->get('rates'))->map(fn(mixed $value) => floatval($value))->all(),
+            collect($data->get('rates'))->map(fn (mixed $value) => floatval($value))->all(),
             CarbonImmutable::createFromTimestamp(intval($data->get('timestamp')))
         );
     }

@@ -11,3 +11,9 @@ parameters:
     checkModelProperties: true
     parallel:
             processTimeout: 300.0
+
+    ignoreErrors:
+      -
+        identifier: larastan.noEnvCallsOutsideOfConfig
+        path: config
+        reportUnmatched: false

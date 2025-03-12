@@ -25,7 +25,7 @@ it('makes a HTTP request to the correct endpoint', function () {
         'timestamp' => now()->subDay()->timestamp,
         'rates' => [
             'EUR' => 1, // Even though this is an int, it should be converted to a float
-            'GBP' => 2.5
+            'GBP' => 2.5,
         ],
     ]]);
 
@@ -43,7 +43,7 @@ it('returns floats for all rates', function () {
         'timestamp' => now()->subDay()->timestamp,
         'rates' => [
             'EUR' => 1, // Even though this is an int, it should be converted to a float
-            'GBP' => 2.5
+            'GBP' => 2.5,
         ],
     ]]);
 

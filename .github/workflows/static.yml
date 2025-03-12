@@ -16,7 +16,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
           coverage: none
 
       - name: Install composer dependencies
@@ -24,3 +24,24 @@ jobs:
 
       - name: Run PHPStan
         run: composer test:types
+
+  ecs:
+    name: ECS
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Install Dependencies
+        run: composer update --prefer-dist --no-interaction --no-progress --ansi
+
+      - name: Run ECS
+        run: composer test:style
