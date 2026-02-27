@@ -2,25 +2,30 @@ name: Tests
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+
     strategy:
       fail-fast: true
       matrix:
         os: [ubuntu-latest]
         php: [8.4, 8.3]
-        laravel: [12.*, 11.*]
+        laravel: ['11.*', '12.*', '13.*']
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: 12.*
             testbench: 10.*
           - laravel: 11.*
             testbench: 9.*
+          - laravel: 13.*
+            testbench: 11.*
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -50,7 +55,6 @@ jobs:
       - name: Execute integration tests
         run: composer test:unit -- --group=integration
         env:
-          # Fixer and ExchangeRate.host use the same API token
           FIXER_ACCESS_KEY: ${{ secrets.FIXER_ACCESS_KEY }}
           EXCHANGE_RATE_ACCESS_KEY: ${{ secrets.FIXER_ACCESS_KEY }}
           CURRENCY_GEO_ACCESS_KEY: ${{ secrets.CURRENCY_GEO_ACCESS_KEY }}
