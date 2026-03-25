@@ -8,9 +8,7 @@ use Illuminate\Console\Command;
 
 use function Termwind\render;
 
-/**
- * @mixin Command
- */
+/** @mixin Command */
 trait HasUsefulConsoleMethods
 {
     private function success(string $message): self

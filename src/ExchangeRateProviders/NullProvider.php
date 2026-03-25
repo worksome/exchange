@@ -7,7 +7,7 @@ namespace Worksome\Exchange\ExchangeRateProviders;
 use Worksome\Exchange\Contracts\ExchangeRateProvider;
 use Worksome\Exchange\Support\Rates;
 
-final class NullProvider implements ExchangeRateProvider
+final readonly class NullProvider implements ExchangeRateProvider
 {
     public function getRates(string $baseCurrency, array $currencies): Rates
     {

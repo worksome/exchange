@@ -51,7 +51,8 @@ In the example above, we are retrieving exchange rates for GBP and EUR based on 
 which includes the base currency, retrieved rates and the time of retrieval. Retrieved rates are an `array` with currency codes as keys and exchange rates as values.
 
 ```php
-$rates = $exchangeRates->getRates(); // ['GBP' => 1.0, 'EUR' => 1.0]
+/** @var \Worksome\Exchange\Support\Rates $exchangeRates */
+$rates = $exchangeRates->rates; // ['GBP' => 1.0, 'EUR' => 1.0]
 ```
 
 ### Fixer

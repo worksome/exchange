@@ -13,7 +13,7 @@ use Worksome\Exchange\Testing\FakeExchangeRateProvider;
 final class Exchange
 {
     public function __construct(
-        private ValidatesCurrencyCodes $validateCurrencyCodes,
+        private readonly ValidatesCurrencyCodes $validateCurrencyCodes,
         private ExchangeRateProvider $exchangeRateProvider,
     ) {
     }
@@ -23,11 +23,11 @@ final class Exchange
      */
     public function fake(array $rates = []): void
     {
-        $this->exchangeRateProvider = (new FakeExchangeRateProvider())->defineRates($rates);
+        $this->exchangeRateProvider = new FakeExchangeRateProvider()->defineRates($rates);
     }
 
     /**
-     * @param non-empty-array<int, string> $currencies
+     * @param non-empty-list<string> $currencies
      *
      * @throws InvalidCurrencyCodeException
      */

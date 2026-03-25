@@ -9,9 +9,9 @@ use Worksome\Exchange\Exceptions\InvalidCurrencyCodeException;
 interface ValidatesCurrencyCodes
 {
     /**
-     * @param non-empty-array<int, string> $currencyCodes
+     * @param non-empty-list<string> $currencyCodes
      *
-     * @return non-empty-array<int, string>
+     * @return non-empty-list<string>
      *
      * @throws InvalidCurrencyCodeException
      */

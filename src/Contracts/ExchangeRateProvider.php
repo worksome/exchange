@@ -8,8 +8,6 @@ use Worksome\Exchange\Support\Rates;
 
 interface ExchangeRateProvider
 {
-    /**
-     * @param non-empty-array<int, string> $currencies
-     */
+    /** @param non-empty-list<string> $currencies */
     public function getRates(string $baseCurrency, array $currencies): Rates;
 }
