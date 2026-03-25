@@ -72,9 +72,11 @@ final class ExchangeRateManager extends Manager
 
     public function createFrankfurterDriver(): FrankfurterProvider
     {
+        $baseUrl = $this->config->string('exchange.services.frankfurter.base_url', 'https://api.frankfurter.dev/v1');
+
         return new FrankfurterProvider(
             $this->container->make(Factory::class),
-            $this->config->string('exchange.services.frankfurter.base_url', 'https://api.frankfurter.dev/v1'),
+            $baseUrl,
         );
     }
 
