@@ -91,6 +91,8 @@ exchange rates.
 
 In your `exchange.php` config file, set `default` to `frankfurter`, or set `EXCHANGE_DRIVER` to `frankfurter` in your `.env` file.
 
+If you are self-hosting Frankfurter or need to use a different endpoint, you can set `FRANKFURTER_BASE_URL` in your `.env` file. It defaults to `https://api.frankfurter.dev/v1`.
+
 With that task completed, you're ready to start using [frankfurter.dev](https://frankfurter.dev) for retrieving up-to-date
 exchange rates.
 
