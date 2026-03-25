@@ -29,7 +29,7 @@ final class ViewLatestRatesCommand extends Command
         $data = $this->data($currencyCodeProvider);
 
         try {
-            // @phpstan-ignore-next-line
+            // @phpstan-ignore argument.type, argument.type
             $this->renderRates($exchange->rates($data['base_currency'], $data['currencies']));
         } catch (InvalidCurrencyCodeException $exception) {
             $this->newLine();
