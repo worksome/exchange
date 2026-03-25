@@ -25,7 +25,7 @@ final class ExchangeServiceProvider extends PackageServiceProvider
 
         $this->app->bind(
             ExchangeRateProvider::class,
-            fn (Application $app) => (new ExchangeRateManager($app))->driver()
+            fn (Application $app) => new ExchangeRateManager($app)->driver()
         );
 
         $this->app->bind(CurrencyCodeProvider::class, FlatCurrencyCodeProvider::class);

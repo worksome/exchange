@@ -8,7 +8,7 @@ use Illuminate\Http\Client\Factory;
 use Worksome\Exchange\Contracts\ExchangeRateProvider;
 use Worksome\Exchange\Support\Rates;
 
-final class ExchangeRateHostProvider implements ExchangeRateProvider
+final readonly class ExchangeRateHostProvider implements ExchangeRateProvider
 {
     private FixerProvider $fixerProvider;
 

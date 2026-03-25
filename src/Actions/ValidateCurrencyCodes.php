@@ -8,7 +8,7 @@ use Worksome\Exchange\Contracts\Actions\ValidatesCurrencyCodes;
 use Worksome\Exchange\Contracts\CurrencyCodeProvider;
 use Worksome\Exchange\Exceptions\InvalidCurrencyCodeException;
 
-final class ValidateCurrencyCodes implements ValidatesCurrencyCodes
+final readonly class ValidateCurrencyCodes implements ValidatesCurrencyCodes
 {
     public function __construct(private CurrencyCodeProvider $currencyCodeProvider)
     {

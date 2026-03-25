@@ -8,6 +8,7 @@ use Worksome\Exchange\Contracts\CurrencyCodeProvider;
 
 final class FlatCurrencyCodeProvider implements CurrencyCodeProvider
 {
+    /** {@inheritdoc} */
     public function all(): array
     {
         return [
