@@ -60,6 +60,10 @@ return [
             'access_key' => env('CURRENCY_GEO_ACCESS_KEY'),
         ],
 
+        'frankfurter' => [
+            'endpoint' => env('FRANKFURTER_ENDPOINT', 'https://api.frankfurter.dev/v1'),
+        ],
+
         /*
         |--------------------------------------------------------------------------
         | Cache

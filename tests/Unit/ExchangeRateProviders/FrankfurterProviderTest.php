@@ -66,6 +66,24 @@ it('sets the returned timestamp as the retrievedAt timestamp', function () {
     expect($rates->getRetrievedAt()->format('Ymd'))->toBe(now()->subDay()->format('Ymd'));
 });
 
+it('makes a HTTP request to a custom endpoint', function () {
+    $client = new Factory();
+    $client->fake(['*' => [
+        'date' => now()->subDay()->format('Y-m-d'),
+        'rates' => [
+            'EUR' => 1,
+            'GBP' => 2.5,
+        ],
+    ]]);
+
+    $fixerProvider = new FrankfurterProvider($client, 'https://custom.frankfurter.dev/v1');
+    $fixerProvider->getRates('EUR', currencies());
+
+    $client->assertSent(function (Request $request) {
+        return str_starts_with($request->url(), 'https://custom.frankfurter.dev/v1/latest');
+    });
+});
+
 it('throws a RequestException if a 500 error occurs', function () {
     $client = new Factory();
     $client->fake(['*' => Create::promiseFor(new Response(500))]);
