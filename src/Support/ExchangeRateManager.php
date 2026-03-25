@@ -19,6 +19,7 @@ final class ExchangeRateManager extends Manager
 {
     public function getDefaultDriver(): string
     {
+        // @phpstan-ignore argument.type
         return strval($this->config->get('exchange.default') ?? 'null');
     }
 
@@ -82,11 +83,13 @@ final class ExchangeRateManager extends Manager
         $factory = $this->container->make(CacheFactory::class);
 
         return new CachedProvider(
-            // @phpstan-ignore-next-line
+            // @phpstan-ignore argument.type
             $factory->store($this->config->get('exchange.services.cache.store')),
-            // @phpstan-ignore-next-line
+            // @phpstan-ignore argument.type, argument.type
             $this->driver($this->config->get('exchange.services.cache.strategy')),
+            // @phpstan-ignore argument.type
             strval($this->config->get('exchange.services.cache.key', 'cached_exchange_rates')),
+            // @phpstan-ignore argument.type
             intval($this->config->get('exchange.services.cache.ttl', 60 * 60 * 24)),
         );
     }

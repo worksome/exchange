@@ -28,11 +28,14 @@ final class FrankfurterProvider implements ExchangeRateProvider
     {
         $data = $this->makeRequest($baseCurrency, $currencies);
 
+        /** @var non-empty-array<string, float> $rates */
+        $rates = $data->get('rates');
+
         return new Rates(
             $baseCurrency,
-            // @phpstan-ignore-next-line
-            collect($data->get('rates'))->map(fn (mixed $value) => (float) $value)->all(),
-            $this->getRetreivedAt($data),
+            // @phpstan-ignore argument.type
+            collect($rates)->map(fn (mixed $value) => (float) $value)->all(),
+            $this->getRetrievedAt($data),
         );
     }
 
@@ -67,7 +70,7 @@ final class FrankfurterProvider implements ExchangeRateProvider
      *
      * @return CarbonImmutable
      */
-    private function getRetreivedAt(Collection $data): CarbonImmutable
+    private function getRetrievedAt(Collection $data): CarbonImmutable
     {
         $date = $data->get('date');
 
@@ -77,7 +80,7 @@ final class FrankfurterProvider implements ExchangeRateProvider
 
         $carbonInstance = CarbonImmutable::createFromFormat('Y-m-d', $date);
 
-        if ($carbonInstance === false) {
+        if ($carbonInstance === null) {
             throw new InvalidArgumentException('The returned date could not be parsed.');
         }
 

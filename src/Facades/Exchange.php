@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Worksome\Exchange\Facades;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Facade;
 use Worksome\Exchange\Support\Rates;
 
@@ -20,10 +21,12 @@ final class Exchange extends Facade
      */
     public static function fake(array $rates = []): void
     {
+        assert(self::$app instanceof Application);
+
         /**
          * @var \Worksome\Exchange\Exchange $fake
          *
-         * @phpstan-ignore-next-line
+         * @phpstan-ignore larastanStrictRules.noFacadeRule
          */
         $fake = self::$app->instance(\Worksome\Exchange\Exchange::class, self::getFacadeRoot());
 

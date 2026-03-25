@@ -25,7 +25,7 @@ final class CurrencyGEOProvider implements ExchangeRateProvider
      */
     public function getRates(string $baseCurrency, array $currencies): Rates
     {
-        // If it's the same currency return it.
+        // If it's the same currency, return it.
         if (count($currencies) === 1 && $baseCurrency === $currencies[0]) {
             return new Rates(
                 $baseCurrency,
@@ -36,10 +36,19 @@ final class CurrencyGEOProvider implements ExchangeRateProvider
 
         $data = $this->makeRequest($baseCurrency, $currencies);
 
+        /**
+         * @var non-empty-array<string, array{
+         *      currency_name: string,
+         *      rate: numeric-string,
+         *      rate_for_amount: numeric-string
+         * }> $rates
+         */
+        $rates = $data->get('rates');
+
         return new Rates(
             $baseCurrency,
-            // @phpstan-ignore-next-line
-            collect($data->get('rates'))->map(fn (mixed $value) => floatval($value['rate']))->all(),
+            // @phpstan-ignore argument.type
+            collect($rates)->map(fn (array $value) => floatval($value['rate']))->all(),
             now()->startOfDay(),
         );
     }
