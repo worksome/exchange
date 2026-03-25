@@ -66,7 +66,7 @@ it('sets the returned timestamp as the retrievedAt timestamp', function () {
     expect($rates->getRetrievedAt()->format('Ymd'))->toBe(now()->subDay()->format('Ymd'));
 });
 
-it('makes a HTTP request to a custom endpoint', function () {
+it('makes a HTTP request to a custom base url', function () {
     $client = new Factory();
     $client->fake(['*' => [
         'date' => now()->subDay()->format('Y-m-d'),

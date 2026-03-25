@@ -61,7 +61,7 @@ return [
         ],
 
         'frankfurter' => [
-            'endpoint' => env('FRANKFURTER_ENDPOINT', 'https://api.frankfurter.dev/v1'),
+            'base_url' => env('FRANKFURTER_BASE_URL', 'https://api.frankfurter.dev/v1'),
         ],
 
         /*

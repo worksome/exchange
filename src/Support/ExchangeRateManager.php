@@ -74,7 +74,7 @@ final class ExchangeRateManager extends Manager
     {
         return new FrankfurterProvider(
             $this->container->make(Factory::class),
-            $this->config->string('exchange.services.frankfurter.endpoint', 'https://api.frankfurter.dev/v1'),
+            $this->config->string('exchange.services.frankfurter.base_url', 'https://api.frankfurter.dev/v1'),
         );
     }
 
