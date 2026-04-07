@@ -12,7 +12,7 @@ use Illuminate\Support\Collection;
 use Worksome\Exchange\Contracts\ExchangeRateProvider;
 use Worksome\Exchange\Support\Rates;
 
-final class FixerProvider implements ExchangeRateProvider
+final readonly class FixerProvider implements ExchangeRateProvider
 {
     public function __construct(
         private Factory $client,

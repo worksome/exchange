@@ -9,7 +9,7 @@ use Illuminate\Support\Arr;
 use Worksome\Exchange\Contracts\ExchangeRateProvider;
 use Worksome\Exchange\Support\Rates;
 
-final class CachedProvider implements ExchangeRateProvider
+final readonly class CachedProvider implements ExchangeRateProvider
 {
     public function __construct(
         private Repository $cache,

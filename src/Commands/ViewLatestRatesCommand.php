@@ -29,7 +29,6 @@ final class ViewLatestRatesCommand extends Command
         $data = $this->data($currencyCodeProvider);
 
         try {
-            // @phpstan-ignore argument.type, argument.type
             $this->renderRates($exchange->rates($data['base_currency'], $data['currencies']));
         } catch (InvalidCurrencyCodeException $exception) {
             $this->newLine();
@@ -44,23 +43,28 @@ final class ViewLatestRatesCommand extends Command
         return self::SUCCESS;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
+    /** @return array{base_currency: string, currencies: non-empty-list<string>} */
     private function data(CurrencyCodeProvider $currencyCodeProvider): array
     {
-        /** @var array<int, string> $givenCurrencies */
+        /** @var list<string> $givenCurrencies */
         $givenCurrencies = $this->argument('currencies');
 
+        $baseCurrency = $this->argument('base-currency') ?? $this->ask('Which base currency do you want to use?');
+
+        assert(is_string($baseCurrency));
+
+        /** @var list<string> $currencies */
+        $currencies = count($givenCurrencies) > 0 ? $givenCurrencies : $this->choice(
+            'Which currencies do you want to fetch exchange rates for?',
+            $currencyCodeProvider->all(),
+            multiple: true,
+        );
+
+        assert($currencies !== []);
+
         return [
-            'base_currency' => $this->argument('base-currency') ?? $this->ask(
-                'Which base currency do you want to use?'
-            ),
-            'currencies' => count($givenCurrencies) > 0 ? $givenCurrencies : $this->choice(
-                'Which currencies do you want to fetch exchange rates for?',
-                $currencyCodeProvider->all(),
-                multiple: true,
-            ),
+            'base_currency' => $baseCurrency,
+            'currencies' => $currencies,
         ];
     }
 
@@ -85,6 +89,6 @@ final class ViewLatestRatesCommand extends Command
                     @endforeach
                 </div>
             </div>
-        HTML, ['baseCurrency' => $rates->getBaseCurrency(), 'rates' => $rates->getRates()]));
+        HTML, ['baseCurrency' => $rates->baseCurrency, 'rates' => $rates->rates]));
     }
 }

@@ -6,8 +6,6 @@ namespace Worksome\Exchange\Contracts;
 
 interface CurrencyCodeProvider
 {
-    /**
-     * @return non-empty-array<int, string>
-     */
+    /** @return non-empty-list<string> */
     public function all(): array;
 }

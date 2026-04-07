@@ -13,7 +13,7 @@ final class InstallCommand extends Command
 
     protected $signature = 'exchange:install';
 
-    protected $description = 'Publish Exchange\'s config file to your project.';
+    protected $description = "Publish Exchange's config file to your project.";
 
     public function handle(): int
     {
