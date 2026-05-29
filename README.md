@@ -97,6 +97,16 @@ If you are self-hosting Frankfurter or need to use a different endpoint, you can
 With that task completed, you're ready to start using [frankfurter.dev](https://frankfurter.dev) for retrieving up-to-date
 exchange rates.
 
+### Frankfurter.dev (v2)
+
+[frankfurter.dev](https://frankfurter.dev) also offers a v2 API. It is reached through a different endpoint and response
+shape than v1, and crucially it covers a much larger currency set than the ECB-only v1 (for example `AED` and `MAD`).
+Like v1, it requires no API key.
+
+In your `exchange.php` config file, set `default` to `frankfurter_v2`, or set `EXCHANGE_DRIVER` to `frankfurter_v2` in your `.env` file.
+
+If you are self-hosting Frankfurter or need to use a different endpoint, you can set `FRANKFURTER_V2_BASE_URL` in your `.env` file. It defaults to `https://api.frankfurter.dev/v2`.
+
 ### Cache
 
 It's unlikely that you want to make a request to a third party service every time you call `Exchange::rates()`. To remedy

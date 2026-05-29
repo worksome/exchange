@@ -13,6 +13,7 @@ use Worksome\Exchange\ExchangeRateProviders\CurrencyGEOProvider;
 use Worksome\Exchange\ExchangeRateProviders\ExchangeRateHostProvider;
 use Worksome\Exchange\ExchangeRateProviders\FixerProvider;
 use Worksome\Exchange\ExchangeRateProviders\FrankfurterProvider;
+use Worksome\Exchange\ExchangeRateProviders\FrankfurterV2Provider;
 use Worksome\Exchange\ExchangeRateProviders\NullProvider;
 
 final class ExchangeRateManager extends Manager
@@ -75,6 +76,16 @@ final class ExchangeRateManager extends Manager
         $baseUrl = $this->config->string('exchange.services.frankfurter.base_url', 'https://api.frankfurter.dev/v1');
 
         return new FrankfurterProvider(
+            $this->container->make(Factory::class),
+            $baseUrl,
+        );
+    }
+
+    public function createFrankfurterV2Driver(): FrankfurterV2Provider
+    {
+        $baseUrl = $this->config->string('exchange.services.frankfurter_v2.base_url', 'https://api.frankfurter.dev/v2');
+
+        return new FrankfurterV2Provider(
             $this->container->make(Factory::class),
             $baseUrl,
         );
