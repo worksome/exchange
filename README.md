@@ -88,11 +88,16 @@ exchange rates.
 
 ### Frankfurter.dev
 
-[frankfurter.dev](https://frankfurter.dev) is an open-source API for current and historical foreign exchange rates published by the European Central Bank, which can be used without an API key.
+[frankfurter.dev](https://frankfurter.dev) is an open-source API for current and historical foreign exchange rates, which can be used without an API key.
+
+The driver targets the v2 API, which covers a much larger currency set than the ECB-only v1 (for example `AED` and `MAD`).
 
 In your `exchange.php` config file, set `default` to `frankfurter`, or set `EXCHANGE_DRIVER` to `frankfurter` in your `.env` file.
 
-If you are self-hosting Frankfurter or need to use a different endpoint, you can set `FRANKFURTER_BASE_URL` in your `.env` file. It defaults to `https://api.frankfurter.dev/v1`.
+If you are self-hosting Frankfurter or need to use a different endpoint, you can set `FRANKFURTER_BASE_URL` in your `.env` file. It defaults to `https://api.frankfurter.dev/v2`.
+
+> [!NOTE]
+> Prior to v3 of this package, the `frankfurter` driver targeted the v1 API. If you need to keep using the v1 API, stay on v2 of this package.
 
 With that task completed, you're ready to start using [frankfurter.dev](https://frankfurter.dev) for retrieving up-to-date
 exchange rates.

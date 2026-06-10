@@ -60,8 +60,20 @@ return [
             'access_key' => env('CURRENCY_GEO_ACCESS_KEY'),
         ],
 
+        /*
+        |--------------------------------------------------------------------------
+        | Frankfurter.dev
+        |--------------------------------------------------------------------------
+        |
+        | Frankfurter is an open-source API that needs no API key. It targets the
+        | v2 API, which covers a much larger currency set (e.g. AED, MAD) than the
+        | ECB-only v1. To use it, set 'default' to 'frankfurter' or set
+        | EXCHANGE_DRIVER to 'frankfurter' in your .env file.
+        |
+        */
+
         'frankfurter' => [
-            'base_url' => env('FRANKFURTER_BASE_URL', 'https://api.frankfurter.dev/v1'),
+            'base_url' => env('FRANKFURTER_BASE_URL', 'https://api.frankfurter.dev/v2'),
         ],
 
         /*
