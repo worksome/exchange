@@ -7,7 +7,6 @@ use Worksome\Exchange\ExchangeRateProviders\CurrencyGEOProvider;
 use Worksome\Exchange\ExchangeRateProviders\ExchangeRateHostProvider;
 use Worksome\Exchange\ExchangeRateProviders\FixerProvider;
 use Worksome\Exchange\ExchangeRateProviders\FrankfurterProvider;
-use Worksome\Exchange\ExchangeRateProviders\FrankfurterV2Provider;
 use Worksome\Exchange\ExchangeRateProviders\NullProvider;
 use Worksome\Exchange\Support\ExchangeRateManager;
 
@@ -28,7 +27,6 @@ it('can instantiate all drivers', function (string $driver, string $expectedClas
     ['fixer', FixerProvider::class],
     ['exchange_rate', ExchangeRateHostProvider::class],
     ['frankfurter', FrankfurterProvider::class],
-    ['frankfurter_v2', FrankfurterV2Provider::class],
     ['currency_geo', CurrencyGEOProvider::class],
     ['cache', CachedProvider::class],
 ]);

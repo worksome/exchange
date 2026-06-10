@@ -8,7 +8,7 @@ return [
      * Go ahead and select a default exchange driver to be used when
      * looking up exchange rates.
      *
-     * Supported: 'null', 'fixer', 'exchange_rate', 'frankfurter', 'frankfurter_v2', 'currency_geo', 'cache'
+     * Supported: 'null', 'fixer', 'exchange_rate', 'frankfurter', 'currency_geo', 'cache'
      */
 
     'default' => env('EXCHANGE_DRIVER', 'frankfurter'),
@@ -60,24 +60,20 @@ return [
             'access_key' => env('CURRENCY_GEO_ACCESS_KEY'),
         ],
 
-        'frankfurter' => [
-            'base_url' => env('FRANKFURTER_BASE_URL', 'https://api.frankfurter.dev/v1'),
-        ],
-
         /*
         |--------------------------------------------------------------------------
-        | Frankfurter.dev (v2)
+        | Frankfurter.dev
         |--------------------------------------------------------------------------
         |
-        | The v2 API uses a different endpoint/response shape than v1 and covers
-        | a much larger currency set (e.g. AED, MAD). It needs no API key. To use
-        | it, set 'default' to 'frankfurter_v2' or set EXCHANGE_DRIVER to
-        | 'frankfurter_v2' in your .env file.
+        | Frankfurter is an open-source API that needs no API key. It targets the
+        | v2 API, which covers a much larger currency set (e.g. AED, MAD) than the
+        | ECB-only v1. To use it, set 'default' to 'frankfurter' or set
+        | EXCHANGE_DRIVER to 'frankfurter' in your .env file.
         |
         */
 
-        'frankfurter_v2' => [
-            'base_url' => env('FRANKFURTER_V2_BASE_URL', 'https://api.frankfurter.dev/v2'),
+        'frankfurter' => [
+            'base_url' => env('FRANKFURTER_BASE_URL', 'https://api.frankfurter.dev/v2'),
         ],
 
         /*
