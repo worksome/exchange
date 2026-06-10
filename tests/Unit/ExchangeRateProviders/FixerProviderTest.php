@@ -16,7 +16,7 @@ it('is able to make a real call to the API', function () {
 
     expect($rates)->toBeInstanceOf(Rates::class);
 })
-    ->skip(getenv('FIXER_ACCESS_KEY') === false, 'No FIXER_ACCESS_KEY was defined.')
+    ->skip(in_array(getenv('FIXER_ACCESS_KEY'), [false, ''], true), 'No FIXER_ACCESS_KEY was defined.')
     ->group('integration');
 
 it('makes a HTTP request to the correct endpoint', function () {
