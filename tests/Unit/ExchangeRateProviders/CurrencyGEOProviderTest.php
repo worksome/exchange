@@ -66,7 +66,7 @@ it('returns floats for all rates', function () {
     $currencyGeoProvider = new CurrencyGEOProvider($client, 'password');
     $rates = $currencyGeoProvider->getRates('EUR', currencies());
 
-    expect($rates->getRates())->each->toBeFloat();
+    expect($rates->rates)->each->toBeFloat();
 });
 
 it('sets the returned timestamp as the retrievedAt timestamp', function () {
@@ -81,7 +81,7 @@ it('sets the returned timestamp as the retrievedAt timestamp', function () {
     $currencyGeoProvider = new CurrencyGEOProvider($client, 'password');
     $rates = $currencyGeoProvider->getRates('EUR', currencies());
 
-    expect($rates->getRetrievedAt()->timestamp)->toBe(now()->startOfDay()->timestamp);
+    expect($rates->retrievedAt->timestamp)->toBe(now()->startOfDay()->timestamp);
 });
 
 it('throws a RequestException if a 500 error occurs', function () {
