@@ -50,7 +50,7 @@ it('returns floats for all rates', function () {
     $fixerProvider = new FixerProvider($client, 'password');
     $rates = $fixerProvider->getRates('EUR', currencies());
 
-    expect($rates->getRates())->each->toBeFloat();
+    expect($rates->rates)->each->toBeFloat();
 });
 
 it('sets the returned timestamp as the retrievedAt timestamp', function () {
@@ -65,7 +65,7 @@ it('sets the returned timestamp as the retrievedAt timestamp', function () {
     $fixerProvider = new FixerProvider($client, 'password');
     $rates = $fixerProvider->getRates('EUR', currencies());
 
-    expect($rates->getRetrievedAt()->timestamp)->toBe(now()->subDay()->timestamp);
+    expect($rates->retrievedAt->timestamp)->toBe(now()->subDay()->timestamp);
 });
 
 it('throws a RequestException if a 500 error occurs', function () {

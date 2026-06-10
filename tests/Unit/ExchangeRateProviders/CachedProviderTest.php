@@ -17,7 +17,7 @@ it('calls the underlying strategy', function () {
     $rates = $cachedProvider->getRates('GBP', ['EUR']);
 
     $fakeProvider->assertRetrievedRates();
-    expect($rates->getRates())->toBe(['EUR' => 3.5]);
+    expect($rates->rates)->toBe(['EUR' => 3.5]);
 });
 
 it('caches the result relative to the given currencies for the given ttl', function () {
@@ -30,7 +30,7 @@ it('caches the result relative to the given currencies for the given ttl', funct
     $cachedProvider = new CachedProvider($cache, new FakeExchangeRateProvider(), 'foo', 60);
     $rates = $cachedProvider->getRates('GBP', ['USD', 'EUR']);
 
-    expect($rates->getRates())->toBe(['EUR' => 4.2]);
+    expect($rates->rates)->toBe(['EUR' => 4.2]);
 });
 
 it('generates the cache key correctly', function (string $baseCurrency, array $currencies, string $expectedKey) {

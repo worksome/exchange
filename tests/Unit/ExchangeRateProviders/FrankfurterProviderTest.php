@@ -48,7 +48,7 @@ it('returns floats for all rates', function () {
     $fixerProvider = new FrankfurterProvider($client);
     $rates = $fixerProvider->getRates('EUR', currencies());
 
-    expect($rates->getRates())->each->toBeFloat();
+    expect($rates->rates)->each->toBeFloat();
 });
 
 it('sets the returned timestamp as the retrievedAt timestamp', function () {
@@ -63,7 +63,7 @@ it('sets the returned timestamp as the retrievedAt timestamp', function () {
     $fixerProvider = new FrankfurterProvider($client);
     $rates = $fixerProvider->getRates('EUR', currencies());
 
-    expect($rates->getRetrievedAt()->format('Ymd'))->toBe(now()->subDay()->format('Ymd'));
+    expect($rates->retrievedAt->format('Ymd'))->toBe(now()->subDay()->format('Ymd'));
 });
 
 it('makes a HTTP request to a custom base url', function () {

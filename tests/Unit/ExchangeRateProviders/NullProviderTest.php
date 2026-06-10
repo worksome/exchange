@@ -9,14 +9,14 @@ it('sets the given base currency as the base currency', function (string $curren
     $nullProvider = new NullProvider();
     $rates = $nullProvider->getRates($currency, currencies());
 
-    expect($rates->getBaseCurrency())->toBe($currency);
+    expect($rates->baseCurrency)->toBe($currency);
 })->with('currencies');
 
 it('always returns 1.0 for any currency', function (string $currency) {
     $nullProvider = new NullProvider();
     $rates = $nullProvider->getRates($currency, currencies());
 
-    expect($rates->getRates())->each->toBeFloat()->toBe(1.0);
+    expect($rates->rates)->each->toBeFloat()->toBe(1.0);
 })->with('currencies');
 
 it('sets now as the retrievedAt timestamp', function () {
@@ -25,5 +25,5 @@ it('sets now as the retrievedAt timestamp', function () {
     $nullProvider = new NullProvider();
     $rates = $nullProvider->getRates('EUR', currencies());
 
-    expect($rates->getRetrievedAt()->equalTo(now()))->toBeTrue();
+    expect($rates->retrievedAt->equalTo(now()))->toBeTrue();
 });
