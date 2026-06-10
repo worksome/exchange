@@ -29,7 +29,7 @@ final readonly class CurrencyGEOProvider implements ExchangeRateProvider
         if (count($currencies) === 1 && $baseCurrency === $currencies[0]) {
             return new Rates(
                 $baseCurrency,
-                [$baseCurrency => 1],
+                [$baseCurrency => 1.00],
                 now()->startOfDay(),
             );
         }
