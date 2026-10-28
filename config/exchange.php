@@ -8,7 +8,7 @@ return [
      * Go ahead and select a default exchange driver to be used when
      * looking up exchange rates.
      *
-     * Supported: 'null', 'fixer', 'exchange_rate', 'frankfurter', 'currency_geo', 'cache'
+     * Supported: 'null', 'fixer', 'exchange_rate', 'frankfurter', 'currency_geo', 'all_rates_today', 'cache'
      */
 
     'default' => env('EXCHANGE_DRIVER', 'frankfurter'),
@@ -58,6 +58,21 @@ return [
 
         'currency_geo' => [
             'access_key' => env('CURRENCY_GEO_ACCESS_KEY'),
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | AllRatesToday.com
+        |--------------------------------------------------------------------------
+        |
+        | AllRatesToday is a paid service for mid-market exchange rates. To use it,
+        | you'll need an API key from allratestoday.com. Set that here, and then change
+        | the 'default' to 'all_rates_today' or set EXCHANGE_DRIVER to 'all_rates_today'.
+        |
+        */
+
+        'all_rates_today' => [
+            'access_key' => env('ALL_RATES_TODAY_ACCESS_KEY'),
         ],
 
         /*
