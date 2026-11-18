@@ -34,7 +34,7 @@
         "orchestra/testbench": "^11.1",
         "pestphp/pest": "^5.0",
         "pestphp/pest-plugin-laravel": "^5.0",
-        "worksome/coding-style": "^6.0"
+        "worksome/coding-style": "^7.0"
     },
     "autoload": {
         "psr-4": {
