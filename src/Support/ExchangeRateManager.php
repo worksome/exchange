@@ -8,6 +8,7 @@ use Illuminate\Contracts\Cache\Factory as CacheFactory;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Support\Manager;
 use Worksome\Exchange\Exceptions\InvalidConfigurationException;
+use Worksome\Exchange\ExchangeRateProviders\AllRatesTodayProvider;
 use Worksome\Exchange\ExchangeRateProviders\CachedProvider;
 use Worksome\Exchange\ExchangeRateProviders\CurrencyGEOProvider;
 use Worksome\Exchange\ExchangeRateProviders\ExchangeRateHostProvider;
@@ -65,6 +66,20 @@ final class ExchangeRateManager extends Manager
         ));
 
         return new CurrencyGEOProvider(
+            $this->container->make(Factory::class),
+            $apiKey,
+        );
+    }
+
+    public function createAllRatesTodayDriver(): AllRatesTodayProvider
+    {
+        $apiKey = $this->config->get('exchange.services.all_rates_today.access_key');
+
+        throw_unless(is_string($apiKey), new InvalidConfigurationException(
+            'You haven\'t set up an API key for AllRatesToday!'
+        ));
+
+        return new AllRatesTodayProvider(
             $this->container->make(Factory::class),
             $apiKey,
         );

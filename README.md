@@ -86,6 +86,16 @@ Set `CURRENCY_GEO_ACCESS_KEY` to your provided access key from currency.getgeoap
 With that task completed, you're ready to start using [Currency.GetGeoApi.com](https://currency.getgeoapi.com) for retrieving up-to-date
 exchange rates.
 
+### AllRatesToday.com
+
+[AllRatesToday.com](https://allratestoday.com) is an alternative option for mid-market rates. A free key comes with a one-time quota of 300 requests; after that a paid plan is needed.
+
+In your `exchange.php` config file, set `default` to `all_rates_today`, or set `EXCHANGE_DRIVER` to `all_rates_today` in your `.env` file.
+Set `ALL_RATES_TODAY_ACCESS_KEY` to your API key from allratestoday.com.
+
+With that task completed, you're ready to start using [AllRatesToday.com](https://allratestoday.com) for retrieving up-to-date
+exchange rates.
+
 ### Frankfurter.dev
 
 [frankfurter.dev](https://frankfurter.dev) is an open-source API for current and historical foreign exchange rates, which can be used without an API key.
